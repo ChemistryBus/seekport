@@ -248,6 +248,12 @@ python3 -m unittest discover -s tests -v
 重试与耗尽、重定向拒绝、传输异常、预算护栏、CLI 退出码，以及 MCP 传输层
 （含畸形消息和参数类型）。
 
+## 致谢
+
+搜索与抓取由 DeepSeek 官方 Search/Fetch API 提供。本项目使用 Claude Code
+（底层为 DeepSeek 模型）开发。这些是工具，不是作者：GitHub 的 contributors
+列表反映的是提交代码的人，而不是使用的模型或 API。
+
 ## 参与贡献
 
 欢迎提交 Issue 和 Pull Request。开发流程见 [CONTRIBUTING.md](CONTRIBUTING.md)，

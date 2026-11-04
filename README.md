@@ -401,6 +401,13 @@ transport failures, budget enforcement, CLI exit codes, and the MCP transport
 - Empty results are a valid outcome, not an error.
 - Not affiliated with DeepSeek.
 
+## Acknowledgements
+
+Search and fetch are powered by DeepSeek's official Search/Fetch API. This
+project was developed with Claude Code running on a DeepSeek model. These are
+tools, not authors: the GitHub contributors list reflects the people who wrote
+commits, not the models or APIs used.
+
 ## Contributing
 
 Contributions are welcome. See [CONTRIBUTING.md](CONTRIBUTING.md) for the
