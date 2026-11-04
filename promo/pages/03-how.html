@@ -1,0 +1,29 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<title>seekport how it works</title>
+<link rel="stylesheet" href="../style.css">
+</head>
+<body>
+<div class="page">
+  <div class="top"><span class="chip">原理</span><span class="pager">3 / 6</span></div>
+  <div class="kicker">HOW IT WORKS / 02</div>
+  <h2>seekport 做了什么</h2>
+  <div class="flow">
+    <div class="node"><span class="tag">AGENT</span><b>Claude Code / Codex / Zcode</b></div>
+    <div class="down">↓</div>
+    <div class="node"><span class="tag">BRIDGE</span><b>Skill 或 MCP</b><small>CLI · stdio tools/call</small></div>
+    <div class="down">↓</div>
+    <div class="node core"><span class="tag">CORE</span><b>seekport</b><small>零依赖 · 过滤 · 重试 · 预算</small></div>
+    <div class="down">↓</div>
+    <div class="node api"><span class="tag">API</span><b>DeepSeek 官方 API</b><small>/v1/tools/search · /v1/tools/fetch</small></div>
+    <div class="down">↓</div>
+    <div class="node good"><span class="tag">RESULT</span><b>排序结果 / Markdown</b><small>rerank_score · authority · 引用 URL</small></div>
+  </div>
+  <p class="note">同一份核心，两种形态：Skill 或 MCP。</p>
+  <div class="next">下一页：怎么搜 →</div>
+  <div class="ghost">03</div>
+</div>
+</body>
+</html>

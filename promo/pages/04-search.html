@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<title>seekport how to search</title>
+<link rel="stylesheet" href="../style.css">
+</head>
+<body>
+<div class="page">
+  <div class="top"><span class="chip">怎么搜</span><span class="pager">4 / 6</span></div>
+  <div class="kicker">HOW TO SEARCH / 03</div>
+  <h2>怎么搜？3 个例子</h2>
+  <div class="example">
+    <div class="ex-head"><span class="ex-num">1</span><b>查期刊投稿指南</b></div>
+    <code>seekport search "Nutrients author guidelines site:mdpi.com" --md</code>
+    <p>先限定 mdpi.com，结果更干净。</p>
+  </div>
+  <div class="example">
+    <div class="ex-head"><span class="ex-num">2</span><b>查官方 API 文档</b></div>
+    <code>seekport search "DeepSeek pricing site:api-docs.deepseek.com" --md</code>
+    <p>官网页面优先，避免引用过时的二手文章。</p>
+  </div>
+  <div class="example">
+    <div class="ex-head"><span class="ex-num">3</span><b>查某个方向的最新进展</b></div>
+    <code>seekport search "exercise metabolism after:2025 lang:en" --md</code>
+    <p>用 after: 限定年份，用 lang: 限定语言。</p>
+  </div>
+  <div class="syntax-example">
+    <span>想引用原文，再抓取</span>
+    <code>seekport fetch "https://..." --md</code>
+  </div>
+  <div class="next">下一页：搜索语法 →</div>
+  <div class="ghost">04</div>
+</div>
+</body>
+</html>

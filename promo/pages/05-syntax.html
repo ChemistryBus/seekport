@@ -1,0 +1,30 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<title>seekport syntax</title>
+<link rel="stylesheet" href="../style.css">
+</head>
+<body>
+<div class="page">
+  <div class="top"><span class="chip">语法</span><span class="pager">5 / 6</span></div>
+  <div class="kicker">SEARCH SYNTAX / 04</div>
+  <h2>搜索语法，和网页搜索一样</h2>
+  <div class="syntax-grid">
+    <div class="syntax-item"><code>site:</code><span>限定站点</span></div>
+    <div class="syntax-item"><code>-site:</code><span>排除站点</span></div>
+    <div class="syntax-item"><code>"..."</code><span>精确短语</span></div>
+    <div class="syntax-item"><code>-词</code><span>排除词</span></div>
+    <div class="syntax-item"><code>lang:zh,en</code><span>限定语言</span></div>
+    <div class="syntax-item"><code>after: / before:</code><span>限定时间</span></div>
+  </div>
+  <div class="syntax-example">
+    <span>组合起来</span>
+    <code>"深色模式" site:github.com -site:twitter.com lang:zh after:2025</code>
+  </div>
+  <p class="note">默认只保留 rerank_score ≥ 1.5；加 <b>--min-authority 3</b> 只要权威来源。</p>
+  <div class="next">下一页：适合谁 →</div>
+  <div class="ghost">05</div>
+</div>
+</body>
+</html>

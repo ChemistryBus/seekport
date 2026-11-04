@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<title>seekport problem</title>
+<link rel="stylesheet" href="../style.css">
+</head>
+<body>
+<div class="page">
+  <div class="top"><span class="chip">问题</span><span class="pager">2 / 6</span></div>
+  <div class="kicker">PROBLEM / 01</div>
+  <h2>问题出在哪？</h2>
+  <div class="term error">
+    <div class="term-head"><i class="dot"></i><i class="dot"></i><i class="dot"></i><span>Claude Code · WebFetch</span></div>
+    <pre>&gt; WebFetch https://api-docs.deepseek.com
+<span class="err">✕ Unable to verify if domain
+  is safe to fetch.</span></pre>
+  </div>
+  <ul class="points">
+    <li><b>第三方网关</b>不认这个域名</li>
+    <li>内置搜索<b>用不了</b> DeepSeek 的过滤参数</li>
+    <li>只能猜，或引用<b>过时的二手文章</b></li>
+  </ul>
+  <div class="compare">
+    <div class="compare-row"><span>二手文章</span><b>$0.75 / 千次 · 5 QPS</b></div>
+    <div class="compare-row good"><span>官方原文</span><b>¥5 / 千次 · 100/25 QPS</b></div>
+  </div>
+  <div class="quote">不是模型不聪明，是它看不到原文。</div>
+  <div class="next">下一页：seekport 怎么解决 →</div>
+  <div class="ghost">02</div>
+</div>
+</body>
+</html>
