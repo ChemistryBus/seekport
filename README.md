@@ -2,6 +2,8 @@
 
 # seekport
 
+[![tests](https://github.com/ChemistryBus/seekport/actions/workflows/test.yml/badge.svg)](https://github.com/ChemistryBus/seekport/actions/workflows/test.yml)
+
 **Bridge DeepSeek's official Search/Fetch API to Claude Code, Codex, Zcode, and any other agent harness.**
 
 `seekport` is a thin, zero-dependency bridge to DeepSeek's official
@@ -350,8 +352,16 @@ seekport/
 ├── mcp/
 │   └── seekport_mcp.py      # zero-dep stdio MCP server
 ├── tests/                   # 81 unit tests, all HTTP mocked
-├── examples/                # real request/response transcripts
+├── examples/                # real request/response transcripts + case study
+├── docs/
+│   └── seekport-flow.svg    # before/after diagram
+├── .github/
+│   ├── workflows/test.yml   # CI: tests on push and pull requests
+│   └── ISSUE_TEMPLATE/      # bug and feature request templates
+├── CONTRIBUTING.md
+├── MAINTENANCE.md
 ├── README.md
+├── README.zh-CN.md
 └── LICENSE
 ```
 
@@ -389,6 +399,12 @@ transport failures, budget enforcement, CLI exit codes, and the MCP transport
 - Fetch success depends on the target site's policy; expect occasional 403/404.
 - Empty results are a valid outcome, not an error.
 - Not affiliated with DeepSeek.
+
+## Contributing
+
+Contributions are welcome. See [CONTRIBUTING.md](CONTRIBUTING.md) for the
+development workflow, and [MAINTENANCE.md](MAINTENANCE.md) for the maintainer
+checklist. Please never paste an API key into an issue.
 
 ## License
 

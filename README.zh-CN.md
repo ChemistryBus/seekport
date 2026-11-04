@@ -2,6 +2,8 @@
 
 # seekport（中文）
 
+[![tests](https://github.com/ChemistryBus/seekport/actions/workflows/test.yml/badge.svg)](https://github.com/ChemistryBus/seekport/actions/workflows/test.yml)
+
 ## 定位
 
 **把 DeepSeek 官方的 Search / Fetch API 接到 Claude Code、Codex、Zcode 以及任何其他 agent harness。**
@@ -245,6 +247,11 @@ python3 -m unittest discover -s tests -v
 全部 HTTP 均为 mock，不消耗额度。81 个用例覆盖参数与选项校验、结果过滤、
 重试与耗尽、重定向拒绝、传输异常、预算护栏、CLI 退出码，以及 MCP 传输层
 （含畸形消息和参数类型）。
+
+## 参与贡献
+
+欢迎提交 Issue 和 Pull Request。开发流程见 [CONTRIBUTING.md](CONTRIBUTING.md)，
+维护清单见 [MAINTENANCE.md](MAINTENANCE.md)。请不要在 Issue 里贴 API key。
 
 ## 许可证
 
