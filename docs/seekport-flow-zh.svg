@@ -1,0 +1,88 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 740" width="1200" height="740" role="img" aria-labelledby="seekport-flow-zh-title seekport-flow-zh-desc">
+  <title id="seekport-flow-zh-title">seekport：使用前与使用后</title>
+  <desc id="seekport-flow-zh-desc">不使用 seekport 时，第三方网关后的 agent 无法使用 WebFetch，也无法使用 DeepSeek 的搜索过滤，拿不到实时网页内容。使用 seekport 时，agent 通过 Skill 或 MCP 调用同一套核心，再由 DeepSeek 官方 Search 与 Fetch API 返回排序结果或 Markdown，最终给出带引用 URL 的回答。</desc>
+  <defs>
+    <marker id="sp-zh-arrow-muted" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#8b93a1"/>
+    </marker>
+    <marker id="sp-zh-arrow-link" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#2f6f9f"/>
+    </marker>
+  </defs>
+
+  <rect width="1200" height="740" fill="#f5f5f5"/>
+
+  <text x="40" y="46" font-family="'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', 'Noto Sans CJK SC', sans-serif" font-size="24" font-weight="600" fill="#2d3142">seekport：使用前 / 使用后</text>
+  <text x="40" y="70" font-family="'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', 'Noto Sans CJK SC', sans-serif" font-size="13" fill="#6b7280">运行在 DeepSeek 上的 agent，如何搜索和抓取网页</text>
+
+  <rect x="32" y="104" width="552" height="600" rx="10" fill="#ffffff" stroke="#d9dde3"/>
+  <rect x="616" y="104" width="552" height="600" rx="10" fill="#ffffff" stroke="#d9dde3"/>
+
+  <text x="64" y="132" font-family="'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', 'Noto Sans CJK SC', sans-serif" font-size="10" letter-spacing="1.2" fill="#8b93a1">不使用 SEEPORT</text>
+  <text x="64" y="150" font-family="'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', 'Noto Sans CJK SC', sans-serif" font-size="12" fill="#8b93a1">没有可用的联网搜索</text>
+
+  <text x="648" y="132" font-family="'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', 'Noto Sans CJK SC', sans-serif" font-size="10" letter-spacing="1.2" fill="#bf4520">使用 SEEPORT</text>
+  <text x="648" y="150" font-family="'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', 'Noto Sans CJK SC', sans-serif" font-size="12" fill="#bf4520">搜索 + 抓取都可用</text>
+
+  <!-- connectors first, so lines sit behind boxes -->
+  <line x1="308" y1="228" x2="308" y2="252" stroke="#8b93a1" stroke-width="1.5" marker-end="url(#sp-zh-arrow-muted)"/>
+  <line x1="308" y1="314" x2="308" y2="338" stroke="#8b93a1" stroke-width="1.5" marker-end="url(#sp-zh-arrow-muted)"/>
+  <line x1="308" y1="432" x2="308" y2="622" stroke="#8b93a1" stroke-width="1.5" stroke-dasharray="5,4" marker-end="url(#sp-zh-arrow-muted)"/>
+
+  <line x1="892" y1="228" x2="892" y2="252" stroke="#8b93a1" stroke-width="1.5" marker-end="url(#sp-zh-arrow-muted)"/>
+  <line x1="892" y1="314" x2="892" y2="338" stroke="#8b93a1" stroke-width="1.5" marker-end="url(#sp-zh-arrow-muted)"/>
+  <line x1="892" y1="408" x2="892" y2="436" stroke="#8b93a1" stroke-width="1.5" marker-end="url(#sp-zh-arrow-muted)"/>
+  <line x1="892" y1="522" x2="892" y2="622" stroke="#2f6f9f" stroke-width="1.5" marker-end="url(#sp-zh-arrow-link)"/>
+
+  <rect x="316" y="516" width="72" height="18" fill="#f5f5f5"/>
+  <text x="320" y="529" font-family="'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', 'Noto Sans CJK SC', sans-serif" font-size="9" letter-spacing="1" fill="#8b93a1">没有兜底</text>
+
+  <!-- left column -->
+  <rect x="108" y="172" width="400" height="56" rx="6" fill="#f2f4f7" stroke="#cfd5dc"/>
+  <text x="124" y="187" font-family="'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', 'Noto Sans CJK SC', sans-serif" font-size="9" letter-spacing="1.2" fill="#8b93a1">智能体</text>
+  <text x="124" y="209" font-family="Inter, -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif" font-size="15" font-weight="600" fill="#2d3142">Agent</text>
+  <text x="124" y="223" font-family="'SF Mono', SFMono-Regular, Menlo, Consolas, monospace" font-size="11" fill="#6b7280">Claude Code · Codex · Zcode</text>
+
+  <rect x="108" y="258" width="400" height="56" rx="6" fill="#ffffff" stroke="#cfd5dc"/>
+  <text x="124" y="273" font-family="'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', 'Noto Sans CJK SC', sans-serif" font-size="9" letter-spacing="1.2" fill="#8b93a1">网关</text>
+  <text x="124" y="295" font-family="'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', 'Noto Sans CJK SC', sans-serif" font-size="15" font-weight="600" fill="#2d3142">第三方网关</text>
+  <text x="124" y="309" font-family="'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', 'Noto Sans CJK SC', sans-serif" font-size="11" fill="#6b7280">没有服务端搜索工具</text>
+
+  <rect x="108" y="344" width="400" height="88" rx="6" fill="#fdf3f1" stroke="#e3b8af"/>
+  <text x="124" y="359" font-family="'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', 'Noto Sans CJK SC', sans-serif" font-size="9" letter-spacing="1.2" fill="#b06a5d">失败</text>
+  <text x="124" y="381" font-family="'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', 'Noto Sans CJK SC', sans-serif" font-size="15" font-weight="600" fill="#a33a2a">WebFetch 被拦截</text>
+  <text x="124" y="399" font-family="'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', 'Noto Sans CJK SC', sans-serif" font-size="11" fill="#8b5b52">无法验证域名是否可安全抓取</text>
+  <text x="124" y="415" font-family="'SF Mono', SFMono-Regular, Menlo, Consolas, monospace" font-size="11" fill="#8b5b52">也没有 site:/lang:/after: 过滤</text>
+
+  <rect x="108" y="628" width="400" height="56" rx="6" fill="#f7f7f7" stroke="#d9dde3"/>
+  <text x="124" y="643" font-family="'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', 'Noto Sans CJK SC', sans-serif" font-size="9" letter-spacing="1.2" fill="#8b93a1">结果</text>
+  <text x="124" y="665" font-family="'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', 'Noto Sans CJK SC', sans-serif" font-size="15" font-weight="600" fill="#4b5563">拿不到实时网页内容</text>
+  <text x="124" y="679" font-family="'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', 'Noto Sans CJK SC', sans-serif" font-size="11" fill="#8b93a1">只能猜测、过时或没有引用</text>
+
+  <!-- right column -->
+  <rect x="692" y="172" width="400" height="56" rx="6" fill="#f2f4f7" stroke="#cfd5dc"/>
+  <text x="708" y="187" font-family="'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', 'Noto Sans CJK SC', sans-serif" font-size="9" letter-spacing="1.2" fill="#8b93a1">智能体</text>
+  <text x="708" y="209" font-family="Inter, -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif" font-size="15" font-weight="600" fill="#2d3142">Agent</text>
+  <text x="708" y="223" font-family="'SF Mono', SFMono-Regular, Menlo, Consolas, monospace" font-size="11" fill="#6b7280">Claude Code · Codex · Zcode</text>
+
+  <rect x="692" y="258" width="400" height="56" rx="6" fill="#ffffff" stroke="#cfd5dc"/>
+  <text x="708" y="273" font-family="'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', 'Noto Sans CJK SC', sans-serif" font-size="9" letter-spacing="1.2" fill="#8b93a1">桥接</text>
+  <text x="708" y="295" font-family="'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', 'Noto Sans CJK SC', sans-serif" font-size="15" font-weight="600" fill="#2d3142">Skill 或 MCP</text>
+  <text x="708" y="309" font-family="'SF Mono', SFMono-Regular, Menlo, Consolas, monospace" font-size="11" fill="#6b7280">CLI · stdio tools/call</text>
+
+  <rect x="692" y="344" width="400" height="64" rx="6" fill="#fdf1ec" stroke="#bf4520" stroke-width="2"/>
+  <text x="708" y="359" font-family="'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', 'Noto Sans CJK SC', sans-serif" font-size="9" letter-spacing="1.2" fill="#bf4520">核心</text>
+  <text x="708" y="382" font-family="Inter, -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif" font-size="15" font-weight="600" fill="#bf4520">seekport</text>
+  <text x="708" y="398" font-family="'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', 'Noto Sans CJK SC', sans-serif" font-size="11" fill="#8b5b52">零依赖 · 过滤 · 重试 · 预算</text>
+
+  <rect x="692" y="442" width="400" height="80" rx="6" fill="#eef5fa" stroke="#b9d2e3"/>
+  <text x="708" y="457" font-family="'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', 'Noto Sans CJK SC', sans-serif" font-size="9" letter-spacing="1.2" fill="#2f6f9f">接口</text>
+  <text x="708" y="479" font-family="'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', 'Noto Sans CJK SC', sans-serif" font-size="15" font-weight="600" fill="#2d3142">DeepSeek 官方 API</text>
+  <text x="708" y="497" font-family="'SF Mono', SFMono-Regular, Menlo, Consolas, monospace" font-size="11" fill="#2f6f9f">/v1/tools/search · /v1/tools/fetch</text>
+  <text x="708" y="513" font-family="'SF Mono', SFMono-Regular, Menlo, Consolas, monospace" font-size="11" fill="#6b7280">rerank_score · authority · Markdown</text>
+
+  <rect x="692" y="628" width="400" height="56" rx="6" fill="#eef7f2" stroke="#b7d8c7"/>
+  <text x="708" y="643" font-family="'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', 'Noto Sans CJK SC', sans-serif" font-size="9" letter-spacing="1.2" fill="#2e6b4f">结果</text>
+  <text x="708" y="665" font-family="'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', 'Noto Sans CJK SC', sans-serif" font-size="15" font-weight="600" fill="#2e6b4f">带引用 URL 的回答</text>
+  <text x="708" y="679" font-family="'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', 'Noto Sans CJK SC', sans-serif" font-size="11" fill="#4b7d62">可核对、及时、可过滤</text>
+</svg>

@@ -35,7 +35,7 @@ seekport closes that loop: search for candidates, fetch the authoritative page,
 cite it. One search + one fetch costs **¥0.01**. Full transcript:
 [examples/case-study.md](examples/case-study.md).
 
-![Without seekport: agent → gateway → WebFetch blocked → no live web content. With seekport: agent → Skill or MCP → seekport → DeepSeek Search/Fetch → cited answer.](docs/seekport-flow.svg)
+![Without seekport: agent → gateway → WebFetch blocked → no live web content. With seekport: agent → Skill or MCP → seekport → DeepSeek Search/Fetch → cited answer.](docs/seekport-flow-en.svg)
 
 ## What you get
 
@@ -354,7 +354,8 @@ seekport/
 ├── tests/                   # 81 unit tests, all HTTP mocked
 ├── examples/                # real request/response transcripts + case study
 ├── docs/
-│   └── seekport-flow.svg    # before/after diagram
+│   ├── seekport-flow-en.svg # before/after diagram (English)
+│   └── seekport-flow-zh.svg # before/after diagram (Chinese)
 ├── .github/
 │   ├── workflows/test.yml   # CI: tests on push and pull requests
 │   └── ISSUE_TEMPLATE/      # bug and feature request templates

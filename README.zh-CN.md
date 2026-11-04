@@ -26,7 +26,7 @@ Claude Code 的 `WebFetch` 会报
 seekport 把这条链路补上：先搜索候选，再抓取权威原文并引用。一次搜索 + 一次
 抓取共 **¥0.01**。完整记录见 [examples/case-study.md](examples/case-study.md)。
 
-![不使用 seekport：agent → 第三方网关 → WebFetch 被拦截 → 拿不到实时网页内容。使用 seekport：agent → Skill 或 MCP → seekport → DeepSeek Search/Fetch → 带引用 URL 的回答。](docs/seekport-flow.svg)
+![不使用 seekport：agent → 第三方网关 → WebFetch 被拦截 → 拿不到实时网页内容。使用 seekport：agent → Skill 或 MCP → seekport → DeepSeek Search/Fetch → 带引用 URL 的回答。](docs/seekport-flow-zh.svg)
 
 ## 特性
 

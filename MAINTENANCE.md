@@ -63,5 +63,5 @@ gh release create v0.1.1 --title "v0.1.1" --notes "这一版改了什么"
 | `mcp/seekport_mcp.py` | MCP server |
 | `tests/` | 自动测试 |
 | `examples/` | 真实输入输出与案例 |
-| `docs/seekport-flow.svg` | README 里的示意图 |
+| `docs/seekport-flow-en.svg` / `-zh.svg` | README 里的示意图（英 / 中） |
 | `.github/workflows/test.yml` | 每次 push 自动跑测试 |

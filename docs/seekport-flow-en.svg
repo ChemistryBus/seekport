@@ -1,11 +1,11 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 740" width="1200" height="740" role="img" aria-labelledby="seekport-flow-title seekport-flow-desc">
-  <title id="seekport-flow-title">seekport: before and after</title>
-  <desc id="seekport-flow-desc">Without seekport, an agent behind a third-party gateway cannot use WebFetch or DeepSeek search filters and gets no live web content. With seekport, the agent calls the same core through a Skill or MCP server, then DeepSeek's official Search and Fetch APIs return ranked results or Markdown that the agent can cite.</desc>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 740" width="1200" height="740" role="img" aria-labelledby="seekport-flow-en-title seekport-flow-en-desc">
+  <title id="seekport-flow-en-title">seekport: before and after</title>
+  <desc id="seekport-flow-en-desc">Without seekport, an agent behind a third-party gateway cannot use WebFetch or DeepSeek search filters and gets no live web content. With seekport, the agent calls the same core through a Skill or MCP server, then DeepSeek's official Search and Fetch APIs return ranked results or Markdown that the agent can cite.</desc>
   <defs>
-    <marker id="sp-arrow-muted" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+    <marker id="sp-en-arrow-muted" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
       <path d="M 0 0 L 10 5 L 0 10 z" fill="#8b93a1"/>
     </marker>
-    <marker id="sp-arrow-link" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+    <marker id="sp-en-arrow-link" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
       <path d="M 0 0 L 10 5 L 0 10 z" fill="#2f6f9f"/>
     </marker>
   </defs>
@@ -19,20 +19,20 @@
   <rect x="616" y="104" width="552" height="600" rx="10" fill="#ffffff" stroke="#d9dde3"/>
 
   <text x="64" y="132" font-family="'SF Mono', SFMono-Regular, Menlo, Consolas, monospace" font-size="10" letter-spacing="1.6" fill="#8b93a1">WITHOUT SEEPORT</text>
-  <text x="64" y="150" font-family="Inter, -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif" font-size="12" fill="#8b93a1">不使用 seekport</text>
+  <text x="64" y="150" font-family="Inter, -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif" font-size="12" fill="#8b93a1">no live web access</text>
 
   <text x="648" y="132" font-family="'SF Mono', SFMono-Regular, Menlo, Consolas, monospace" font-size="10" letter-spacing="1.6" fill="#bf4520">WITH SEEPORT</text>
-  <text x="648" y="150" font-family="Inter, -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif" font-size="12" fill="#bf4520">使用 seekport</text>
+  <text x="648" y="150" font-family="Inter, -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif" font-size="12" fill="#bf4520">live search + fetch</text>
 
   <!-- connectors first, so lines sit behind boxes -->
-  <line x1="308" y1="228" x2="308" y2="252" stroke="#8b93a1" stroke-width="1.5" marker-end="url(#sp-arrow-muted)"/>
-  <line x1="308" y1="314" x2="308" y2="338" stroke="#8b93a1" stroke-width="1.5" marker-end="url(#sp-arrow-muted)"/>
-  <line x1="308" y1="432" x2="308" y2="622" stroke="#8b93a1" stroke-width="1.5" stroke-dasharray="5,4" marker-end="url(#sp-arrow-muted)"/>
+  <line x1="308" y1="228" x2="308" y2="252" stroke="#8b93a1" stroke-width="1.5" marker-end="url(#sp-en-arrow-muted)"/>
+  <line x1="308" y1="314" x2="308" y2="338" stroke="#8b93a1" stroke-width="1.5" marker-end="url(#sp-en-arrow-muted)"/>
+  <line x1="308" y1="432" x2="308" y2="622" stroke="#8b93a1" stroke-width="1.5" stroke-dasharray="5,4" marker-end="url(#sp-en-arrow-muted)"/>
 
-  <line x1="892" y1="228" x2="892" y2="252" stroke="#8b93a1" stroke-width="1.5" marker-end="url(#sp-arrow-muted)"/>
-  <line x1="892" y1="314" x2="892" y2="338" stroke="#8b93a1" stroke-width="1.5" marker-end="url(#sp-arrow-muted)"/>
-  <line x1="892" y1="408" x2="892" y2="436" stroke="#8b93a1" stroke-width="1.5" marker-end="url(#sp-arrow-muted)"/>
-  <line x1="892" y1="522" x2="892" y2="622" stroke="#2f6f9f" stroke-width="1.5" marker-end="url(#sp-arrow-link)"/>
+  <line x1="892" y1="228" x2="892" y2="252" stroke="#8b93a1" stroke-width="1.5" marker-end="url(#sp-en-arrow-muted)"/>
+  <line x1="892" y1="314" x2="892" y2="338" stroke="#8b93a1" stroke-width="1.5" marker-end="url(#sp-en-arrow-muted)"/>
+  <line x1="892" y1="408" x2="892" y2="436" stroke="#8b93a1" stroke-width="1.5" marker-end="url(#sp-en-arrow-muted)"/>
+  <line x1="892" y1="522" x2="892" y2="622" stroke="#2f6f9f" stroke-width="1.5" marker-end="url(#sp-en-arrow-link)"/>
 
   <rect x="316" y="516" width="82" height="18" fill="#f5f5f5"/>
   <text x="320" y="529" font-family="'SF Mono', SFMono-Regular, Menlo, Consolas, monospace" font-size="9" letter-spacing="1" fill="#8b93a1">NO FALLBACK</text>
