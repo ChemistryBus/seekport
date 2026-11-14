@@ -32,7 +32,7 @@ The suite mocks all HTTP, so it spends no API credits and needs no key.
 - [ ] No new third-party runtime dependency. The core uses the standard library only.
 - [ ] `scripts/ds_core.py` stays under 300 lines.
 - [ ] Behaviour changes come with a test.
-- [ ] User-facing changes update `README.md`, `README.zh-CN.md`, and `SKILL.md`.
+- [ ] User-facing changes update `README.md` (Chinese), `README.en.md` (English), and `SKILL.md`.
 - [ ] No secrets, keys, private URLs, or personal data in the diff.
 
 ## Style

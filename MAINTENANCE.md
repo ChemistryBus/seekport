@@ -21,7 +21,7 @@ cd "/Users/wubolong/Documents/Claude/Github Seekport"
 
 ## 修改内容
 
-- **改文字**：在 GitHub 打开 `README.md` 或 `README.zh-CN.md`，点右上角铅笔，改完点 **Commit changes**。
+- **改文字**：在 GitHub 打开 `README.md`（中文）或 `README.en.md`（英文），点右上角铅笔，改完点 **Commit changes**。
 - **改代码 / 加功能**：直接告诉 Claude 要改什么。改完测试后会提交并推送。
 - **不要在网页上直接改** `scripts/` 或 `mcp/` 下的代码，除非你确定自己在做什么。
 
@@ -56,7 +56,7 @@ gh release create v0.1.1 --title "v0.1.1" --notes "这一版改了什么"
 
 | 文件 | 作用 |
 |---|---|
-| `README.md` / `README.zh-CN.md` | 项目主页（英 / 中） |
+| `README.md` / `README.en.md` | 项目主页（中 / 英） |
 | `SKILL.md` | Agent Skill 说明 |
 | `scripts/ds_core.py` | 核心库 |
 | `scripts/cli.py` | 命令行 |
