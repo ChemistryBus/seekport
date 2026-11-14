@@ -1,0 +1,69 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<title>seekport · 08 安装</title>
+<link rel="stylesheet" href="../style.css">
+</head>
+<body>
+<main class="page p-install">
+  <header class="masthead">
+    <div class="brand">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <circle cx="12" cy="5" r="2.5"/>
+        <path d="M12 7.5V21M5 14c0 4 3.5 7 7 7s7-3 7-7M3 14h4M17 14h4"/>
+      </svg>
+      seekport
+    </div>
+    <div class="meta">安装 · 07</div>
+  </header>
+
+  <div class="body">
+    <div class="kicker">INSTALL</div>
+
+    <h1>不用 pip install。<br>会 Python 就能装。</h1>
+
+    <div class="install-card">
+      <div class="install-head">
+        <span class="t">方式一：当 Skill 用</span>
+        <span class="tag">CLAUDE CODE</span>
+      </div>
+      <div class="install-body"><span class="dim"># 克隆 + 软链到 skills 目录</span>
+git clone https://github.com/ChemistryBus/seekport ~/seekport
+ln -s ~/seekport ~/.claude/skills/seekport
+
+<span class="dim"># 填入你自己的 DeepSeek key</span>
+export <span class="hl">DEEPSEEK_API_KEY</span>=sk-...</div>
+      <div class="install-note">重启会话，就能在 Claude Code 里用。</div>
+    </div>
+
+    <div class="install-card">
+      <div class="install-head">
+        <span class="t">方式二：当 MCP 用</span>
+        <span class="tag">任意 MCP</span>
+      </div>
+      <div class="install-body"><span class="dim"># 注册 stdio MCP server</span>
+claude mcp add seekport -- \
+  python3 ~/seekport/mcp/seekport_mcp.py
+
+<span class="dim"># 暴露两个工具</span>
+<span class="hl">deepseek_search</span>
+<span class="hl">deepseek_fetch</span></div>
+      <div class="install-note">以 Claude Code 为例；其他 harness 用 JSON 配置。</div>
+    </div>
+
+    <div class="cmd-foot">依赖只有 Python 3.9+ · 不用 pip · 不用 Node</div>
+
+    <div class="takeaway">
+      <span class="tk-k">建议</span>
+      <span class="tk-t">先跑通一次 search，再交给 Agent。</span>
+    </div>
+  </div>
+
+  <footer class="foot">
+    <span class="next">下一页：适合谁，不适合谁 →</span>
+    <span class="folio">08 / 09</span>
+  </footer>
+</main>
+</body>
+</html>

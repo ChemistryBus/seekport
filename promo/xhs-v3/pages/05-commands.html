@@ -1,0 +1,69 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<title>seekport · 05 两条命令</title>
+<link rel="stylesheet" href="../style.css">
+</head>
+<body>
+<main class="page p-cmd">
+  <header class="masthead">
+    <div class="brand">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <circle cx="12" cy="5" r="2.5"/>
+        <path d="M12 7.5V21M5 14c0 4 3.5 7 7 7s7-3 7-7M3 14h4M17 14h4"/>
+      </svg>
+      seekport
+    </div>
+    <div class="meta">怎么用 · 04</div>
+  </header>
+
+  <div class="body">
+    <div class="kicker">TWO COMMANDS</div>
+
+    <h1>两条命令，<br>就够了。</h1>
+
+    <p class="cmd-intro">先记住这一个变量：<code>CLI=~/.claude/skills/seekport/scripts/cli.py</code></p>
+
+    <div class="term cmd-term">
+      <div class="term-bar">
+        <span class="term-dot"></span><span class="term-dot"></span><span class="term-dot"></span>
+        &nbsp;终端 · zsh
+      </div>
+      <div class="term-body"><span class="dim"># 1. 搜候选，先看标题和摘要</span>
+<span class="cmd">python3 $CLI search \</span>
+<span class="cmd">  "DeepSeek 搜索 API 计费 site:api-docs.deepseek.com" --md</span>
+
+<span class="dim"># 2. 命中官方页，再抓全文</span>
+<span class="cmd">python3 $CLI fetch \</span>
+<span class="cmd">  "https://api-docs.deepseek.com/zh-cn/guides/search" --md</span></div>
+    </div>
+
+    <div class="cmd-chips">
+      <span class="chip red">查官方文档</span>
+      <span class="chip">查期刊指南</span>
+      <span class="chip">查最新进展</span>
+    </div>
+
+    <div class="cmd-foot">输出自带：标题 · 摘要 · 排序分 · 权威度 · 引用链接</div>
+
+        <div class="out-card">
+      <div class="out-k">SEARCH 输出 · 节选</div>
+      <div class="out-line"><b>## 1.</b> 某云厂商 · 2026-10-18</div>
+      <div class="out-meta">score 2.36 · auth 3</div>
+      <div class="out-note">只是候选，别停在这里。</div>
+    </div>
+
+<div class="takeaway">
+      <span class="tk-k">顺序</span>
+      <span class="tk-t">先搜候选，再抓原文。两条命令，按需组合。</span>
+    </div>
+  </div>
+
+  <footer class="foot">
+    <span class="next">下一页：四个真实查询 →</span>
+    <span class="folio">05 / 09</span>
+  </footer>
+</main>
+</body>
+</html>

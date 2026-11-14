@@ -18,3 +18,15 @@ htmlcov/
 
 # Promo renders (regenerate with promo/render.py)
 promo/out/
+
+# Promo renders (regenerate with promo/xhs-v2/render.py or promo/xhs-v3/render.py)
+promo/xhs-v2/out/
+promo/xhs-v3/out/
+
+# HyperFrames renders and local state
+promo/video/renders/
+promo/video/.hyperframes/
+promo/video/node_modules/
+
+# System font, not redistributable
+promo/video/assets/fonts/

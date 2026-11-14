@@ -1,5 +1,10 @@
 # Promo kit
 
+> 最新版 9 图（少留白、每页带信息带）在 [`xhs-v3/`](xhs-v3/)，见其 [`note.md`](xhs-v3/note.md)。上一版在 [`xhs-v2/`](xhs-v2/)。本目录保留最早的 6 图版本。
+>
+> 视频在 [`video/`](video/)，40 秒、1080×1440、中文口播；分镜见 [`video/STORYBOARD.md`](video/STORYBOARD.md)。
+
+
 Xiaohongshu (小红书) carousel for seekport: 6 pages, 1080 × 1440 (3:4).
 
 ## Files

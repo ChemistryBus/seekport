@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<title>seekport · 07 语法小抄</title>
+<link rel="stylesheet" href="../style.css">
+</head>
+<body>
+<main class="page p-syntax">
+  <header class="masthead">
+    <div class="brand">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <circle cx="12" cy="5" r="2.5"/>
+        <path d="M12 7.5V21M5 14c0 4 3.5 7 7 7s7-3 7-7M3 14h4M17 14h4"/>
+      </svg>
+      seekport
+    </div>
+    <div class="meta">小抄 · 06</div>
+  </header>
+
+  <div class="body">
+    <div class="kicker">CHEAT SHEET</div>
+
+    <h1>搜索语法，<br>和网页搜索一样。</h1>
+
+    <div class="syntax-grid">
+      <div class="syn"><div class="op">site:</div><div class="name">限定站点</div><div class="eg">site:mdpi.com</div></div>
+      <div class="syn"><div class="op">-site:</div><div class="name">排除站点</div><div class="eg">-site:twitter.com</div></div>
+      <div class="syn"><div class="op">"…"</div><div class="name">精确短语</div><div class="eg">"author guidelines"</div></div>
+      <div class="syn"><div class="op">-词</div><div class="name">排除词</div><div class="eg">-广告</div></div>
+      <div class="syn"><div class="op">lang:</div><div class="name">限定语言</div><div class="eg">lang:zh,en</div></div>
+      <div class="syn"><div class="op">after:</div><div class="name">限定时间</div><div class="eg">after:2025 before:2026</div></div>
+    </div>
+
+    <div class="term syntax-eg">
+      <div class="term-bar">
+        <span class="term-dot"></span><span class="term-dot"></span><span class="term-dot"></span>
+        &nbsp;组合起来
+      </div>
+      <div class="term-body"><span class="cmd">"深色模式" site:github.com -site:twitter.com lang:zh after:2025</span></div>
+    </div>
+
+    <div class="syntax-note">默认只保留排序分 <code>≥ 1.5</code> 的结果；加 <code>--min-authority 3</code> 只留权威来源。</div>
+
+        <div class="strip">
+      <div class="strip-item"><div class="sk">默认</div><div class="sv">score ≥ 1.5</div><div class="sd">丢掉低相关结果</div></div>
+      <div class="strip-item"><div class="sk">严格</div><div class="sv">authority ≥ 3</div><div class="sd">只看权威来源</div></div>
+      <div class="strip-item"><div class="sk">免费</div><div class="sv">空结果不计费</div><div class="sd">失败也不计费</div></div>
+    </div>
+
+<div class="takeaway">
+      <span class="tk-k">小抄</span>
+      <span class="tk-t">语法不用背，收藏这张就行。</span>
+    </div>
+  </div>
+
+  <footer class="foot">
+    <span class="next">下一页：怎么装 →</span>
+    <span class="folio">07 / 09</span>
+  </footer>
+</main>
+</body>
+</html>

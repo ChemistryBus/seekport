@@ -1,0 +1,1580 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=1080, height=1440" />
+    <title>seekport · 40s promo</title>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.15.0/dist/gsap.min.js"></script>
+    <style>
+      @font-face {
+        font-family: "HiraginoGB";
+        src: url("assets/fonts/HiraginoSansGB.ttc") format("truetype");
+        font-weight: 100 900;
+      }
+
+      :root {
+        --paper: #f7f1e5;
+        --paper-deep: #efe4d0;
+        --card: #fffdf7;
+        --ink: #191b1f;
+        --muted: #6d6457;
+        --red: #d5472b;
+        --red-soft: #f7e2da;
+        --green: #2c7a5b;
+        --green-soft: #dfeee5;
+        --blue: #1f5d7a;
+        --blue-soft: #e2edf2;
+        --yellow: #f3c95a;
+        --terminal: #17191d;
+        --terminal-ink: #ece5d7;
+        --line: rgba(25, 27, 31, 0.16);
+        --sans: "HiraginoGB", "Noto Sans JP", sans-serif;
+        --serif: "HiraginoGB", "Noto Sans JP", sans-serif;
+        --mono: "IBM Plex Mono", "Menlo", monospace;
+      }
+
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      html,
+      body {
+        width: 1080px;
+        height: 1440px;
+        overflow: hidden;
+        background: var(--paper);
+        font-family: var(--sans);
+        color: var(--ink);
+      }
+
+      #root {
+        position: absolute;
+        inset: 0;
+        width: 1080px;
+        height: 1440px;
+        overflow: hidden;
+      }
+
+      .scene {
+        position: absolute;
+        inset: 0;
+        overflow: hidden;
+        padding: 70px 80px 96px 104px;
+      }
+
+      .paper-bg {
+        position: absolute;
+        inset: 0;
+        z-index: 0;
+        background-color: var(--paper);
+        background-image:
+          linear-gradient(
+            90deg,
+            transparent 0 63px,
+            rgba(213, 71, 43, 0.18) 63px 65px,
+            transparent 65px
+          ),
+          repeating-linear-gradient(
+            180deg,
+            transparent 0 53px,
+            rgba(25, 27, 31, 0.055) 53px 54px
+          );
+      }
+
+      .content {
+        position: relative;
+        z-index: 1;
+        height: 100%;
+      }
+
+      .masthead {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding-bottom: 12px;
+        border-bottom: 2px solid var(--ink);
+      }
+
+      .brand {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        font-family: var(--mono);
+        font-size: 22px;
+        font-weight: 700;
+        letter-spacing: 0.03em;
+      }
+
+      .brand svg {
+        width: 28px;
+        height: 28px;
+      }
+
+      .meta {
+        font-family: var(--mono);
+        font-size: 18px;
+        font-weight: 600;
+        letter-spacing: 0.08em;
+        color: var(--muted);
+      }
+
+      .kicker {
+        margin-top: 30px;
+        font-family: var(--mono);
+        font-size: 18px;
+        font-weight: 700;
+        letter-spacing: 0.2em;
+        color: var(--red);
+      }
+
+      .h1 {
+        margin-top: 8px;
+        font-family: var(--sans);
+        font-size: 92px;
+        line-height: 1.08;
+        font-weight: 800;
+        letter-spacing: -4px;
+      }
+
+      .h1.small {
+        font-size: 82px;
+        letter-spacing: -3px;
+      }
+
+      .line {
+        display: block;
+        overflow: hidden;
+      }
+
+      .line > span {
+        display: block;
+      }
+
+      .red {
+        color: var(--red);
+      }
+
+      .green {
+        color: var(--green);
+      }
+
+      .mono {
+        font-family: var(--mono);
+      }
+
+      .term {
+        position: relative;
+        background: var(--terminal);
+        color: var(--terminal-ink);
+        border: 2px solid #000;
+        border-radius: 10px;
+        overflow: hidden;
+      }
+
+      .term-bar {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        padding: 12px 18px;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+        font-family: var(--mono);
+        font-size: 15px;
+        font-weight: 600;
+        color: #aaa294;
+      }
+
+      .term-dot {
+        width: 11px;
+        height: 11px;
+        border-radius: 50%;
+        background: #5d6168;
+      }
+
+      .term-body {
+        padding: 18px 22px 20px;
+        font-family: var(--mono);
+        font-size: 21px;
+        line-height: 1.65;
+        font-weight: 500;
+        white-space: pre-wrap;
+        word-break: break-word;
+      }
+
+      .term .cmd {
+        color: #f0c674;
+      }
+      .term .err {
+        color: #ff8a6b;
+      }
+      .term .dim {
+        color: #8f887b;
+      }
+
+      .stamp {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        border: 3px solid currentColor;
+        outline: 1px solid currentColor;
+        outline-offset: 3px;
+        padding: 6px 11px 4px;
+        font-family: var(--mono);
+        font-size: 21px;
+        font-weight: 800;
+        letter-spacing: 0.12em;
+        line-height: 1;
+        opacity: 0;
+      }
+
+      .stamp.red {
+        color: var(--red);
+      }
+      .stamp.green {
+        color: var(--green);
+      }
+
+      /* ---------- scene 1 ---------- */
+
+      #s1 .h1 {
+        margin-top: 16px;
+        font-size: 108px;
+        line-height: 1.06;
+        letter-spacing: -5px;
+      }
+
+      #s1 .marker {
+        padding: 0 4px;
+        background-image: linear-gradient(var(--yellow), var(--yellow));
+        background-repeat: no-repeat;
+        background-position: 0 86%;
+        background-size: 0% 26px;
+      }
+
+      #s1 .lede {
+        margin-top: 16px;
+        font-size: 28px;
+        line-height: 1.5;
+        font-weight: 500;
+        color: var(--muted);
+      }
+
+      #s1 .stamp-big {
+        position: absolute;
+        right: 110px;
+        top: 850px;
+        color: var(--red);
+        font-size: 34px;
+        padding: 9px 16px 6px;
+        transform: rotate(-7deg);
+        opacity: 0;
+      }
+
+      #s1 .cover-foot {
+        position: absolute;
+        left: 104px;
+        right: 80px;
+        bottom: 104px;
+        display: flex;
+        justify-content: space-between;
+        align-items: baseline;
+        border-top: 2px solid var(--ink);
+        padding-top: 14px;
+      }
+
+      #s1 .cover-foot .a {
+        font-family: var(--mono);
+        font-size: 18px;
+        font-weight: 600;
+        color: var(--muted);
+      }
+
+      #s1 .cover-foot .b {
+        font-size: 26px;
+        font-weight: 700;
+        color: var(--red);
+      }
+
+      /* ---------- scene 2 ---------- */
+
+      #s2 .h1 {
+        font-size: 86px;
+      }
+
+      #s2 .term-wrap {
+        position: absolute;
+        left: 104px;
+        right: 80px;
+        top: 330px;
+      }
+
+      #s2 .ellipse {
+        position: absolute;
+        inset: 0;
+        width: 100%;
+        height: 100%;
+        overflow: visible;
+        pointer-events: none;
+      }
+
+      #s2 .ellipse path {
+        fill: none;
+        stroke: var(--red);
+        stroke-width: 3;
+        stroke-dasharray: 7 6;
+        stroke-linecap: round;
+      }
+
+      #s2 .pen-note {
+        position: absolute;
+        right: 80px;
+        top: 700px;
+        text-align: right;
+        font-size: 23px;
+        line-height: 1.4;
+        font-weight: 700;
+        color: var(--red);
+        opacity: 0;
+      }
+
+      #s2 .bullets {
+        position: absolute;
+        left: 104px;
+        right: 80px;
+        top: 840px;
+        border-top: 2px solid var(--ink);
+      }
+
+      #s2 .bullet {
+        display: flex;
+        gap: 12px;
+        align-items: baseline;
+        padding: 11px 0;
+        border-bottom: 1px solid var(--line);
+        font-size: 23px;
+        font-weight: 600;
+        opacity: 0;
+      }
+
+      #s2 .bullet .x {
+        font-family: var(--mono);
+        font-size: 22px;
+        font-weight: 800;
+        color: var(--red);
+      }
+
+      #s2 .bullet .muted {
+        color: var(--muted);
+        font-weight: 500;
+      }
+
+      #s2 .punch {
+        position: absolute;
+        left: 104px;
+        right: 80px;
+        bottom: 220px;
+        font-family: var(--serif);
+        font-size: 42px;
+        line-height: 1.35;
+        font-weight: 700;
+        opacity: 0;
+      }
+
+      #s2 .punch-u {
+        display: inline-block;
+        border-bottom: 5px solid var(--yellow);
+        transform-origin: left center;
+      }
+
+      /* ---------- scene 3 ---------- */
+
+      #s3 .h1 {
+        font-size: 86px;
+      }
+
+      #s3 .compare {
+        position: absolute;
+        left: 104px;
+        right: 80px;
+        top: 320px;
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 24px;
+      }
+
+      #s3 .col-head {
+        display: flex;
+        justify-content: space-between;
+        align-items: baseline;
+        border-bottom: 2px solid var(--ink);
+        padding-bottom: 8px;
+        margin-bottom: 12px;
+      }
+
+      #s3 .col-head .t {
+        font-family: var(--mono);
+        font-size: 17px;
+        font-weight: 800;
+        letter-spacing: 0.1em;
+      }
+
+      #s3 .col-head .s {
+        font-size: 14px;
+        color: var(--muted);
+      }
+
+      #s3 .stale {
+        background: var(--card);
+        border: 1.5px solid var(--line);
+        padding: 14px 16px;
+        margin-bottom: 11px;
+        opacity: 0;
+      }
+
+      #s3 .stale .t {
+        font-size: 18px;
+        font-weight: 600;
+        line-height: 1.3;
+      }
+
+      #s3 .stale .m {
+        font-family: var(--mono);
+        font-size: 13px;
+        color: var(--muted);
+        margin-top: 3px;
+      }
+
+      #s3 .stale .n {
+        font-size: 27px;
+        font-weight: 800;
+        color: var(--red);
+        margin-top: 2px;
+      }
+
+      #s3 .stale-stamp {
+        position: absolute;
+        left: 250px;
+        top: 250px;
+        background: var(--paper);
+        z-index: 2;
+      }
+
+      #s3 .official {
+        position: relative;
+        background: var(--green-soft);
+        border: 2px solid var(--green);
+        padding: 22px 20px;
+        min-height: 360px;
+        opacity: 0;
+      }
+
+      #s3 .official .k {
+        font-family: var(--mono);
+        font-size: 14px;
+        font-weight: 700;
+        letter-spacing: 0.1em;
+        color: var(--green);
+      }
+
+      #s3 .official .big {
+        font-size: 70px;
+        font-weight: 800;
+        letter-spacing: -3px;
+        line-height: 1.05;
+        color: var(--green);
+        margin-top: 8px;
+      }
+
+      #s3 .official .big span {
+        display: block;
+        font-size: 18px;
+        font-weight: 600;
+        letter-spacing: 0;
+        color: var(--muted);
+        margin-top: 4px;
+      }
+
+      #s3 .official .line {
+        font-family: var(--mono);
+        font-size: 17px;
+        font-weight: 600;
+        line-height: 1.5;
+        color: var(--ink);
+        margin-top: 12px;
+      }
+
+      #s3 .official .stamp {
+        position: absolute;
+        right: 12px;
+        bottom: 14px;
+      }
+
+      #s3 .verdict {
+        position: absolute;
+        left: 104px;
+        right: 80px;
+        top: 840px;
+        background: var(--red-soft);
+        border-left: 6px solid var(--red);
+        padding: 12px 16px;
+        display: flex;
+        gap: 14px;
+        align-items: baseline;
+        opacity: 0;
+      }
+
+      #s3 .verdict .k {
+        font-family: var(--mono);
+        font-size: 14px;
+        font-weight: 800;
+        letter-spacing: 0.14em;
+        color: var(--red);
+      }
+
+      #s3 .verdict .t {
+        font-size: 19px;
+        font-weight: 600;
+        line-height: 1.5;
+      }
+
+      #s3 .statement {
+        position: absolute;
+        left: 104px;
+        right: 80px;
+        bottom: 100px;
+        font-family: var(--serif);
+        font-size: 42px;
+        line-height: 1.35;
+        font-weight: 700;
+        opacity: 0;
+      }
+
+      /* ---------- scene 4 ---------- */
+
+      #s4 .h1 {
+        font-size: 82px;
+      }
+
+      #s4 .flow {
+        position: absolute;
+        left: 104px;
+        right: 80px;
+        top: 320px;
+        padding-left: 58px;
+      }
+
+      #s4 .flow-spine {
+        position: absolute;
+        left: 21px;
+        top: 22px;
+        width: 3px;
+        height: 0;
+        background: var(--ink);
+      }
+
+      #s4 .flow-item {
+        position: relative;
+        margin-bottom: 20px;
+        opacity: 0;
+      }
+
+      #s4 .flow-no {
+        position: absolute;
+        left: -58px;
+        top: 18px;
+        width: 44px;
+        height: 44px;
+        border-radius: 50%;
+        background: var(--paper);
+        border: 3px solid var(--ink);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-family: var(--mono);
+        font-size: 20px;
+        font-weight: 800;
+      }
+
+      #s4 .flow-card {
+        background: var(--card);
+        border: 2px solid var(--ink);
+        padding: 17px 20px 18px;
+      }
+
+      #s4 .flow-card.hot {
+        background: var(--red-soft);
+        border-color: var(--red);
+      }
+
+      #s4 .flow-label {
+        font-family: var(--mono);
+        font-size: 14px;
+        font-weight: 700;
+        letter-spacing: 0.12em;
+        color: var(--muted);
+      }
+
+      #s4 .flow-card.hot .flow-label {
+        color: var(--red);
+      }
+
+      #s4 .flow-main {
+        font-size: 29px;
+        font-weight: 700;
+        line-height: 1.25;
+        margin-top: 2px;
+      }
+
+      #s4 .flow-card.hot .flow-main {
+        color: var(--red);
+      }
+
+      #s4 .flow-sub {
+        font-family: var(--mono);
+        font-size: 17px;
+        line-height: 1.4;
+        color: var(--muted);
+        margin-top: 2px;
+      }
+
+      #s4 .tags {
+        display: flex;
+        gap: 6px;
+        margin-top: 6px;
+      }
+
+      #s4 .tag {
+        font-family: var(--mono);
+        font-size: 12px;
+        font-weight: 700;
+        color: var(--red);
+        border: 1.5px solid var(--red);
+        padding: 2px 5px;
+      }
+
+      #s4 .flow-verdict {
+        position: absolute;
+        left: 104px;
+        right: 80px;
+        top: 990px;
+        background: var(--red-soft);
+        border-left: 6px solid var(--red);
+        padding: 12px 16px;
+        display: flex;
+        gap: 14px;
+        align-items: baseline;
+        opacity: 0;
+      }
+
+      #s4 .flow-verdict .k {
+        font-family: var(--mono);
+        font-size: 14px;
+        font-weight: 800;
+        letter-spacing: 0.14em;
+        color: var(--red);
+      }
+
+      #s4 .flow-verdict .t {
+        font-size: 19px;
+        font-weight: 600;
+        line-height: 1.5;
+      }
+
+      #s4 .flow-caption {
+        position: absolute;
+        left: 104px;
+        right: 80px;
+        bottom: 130px;
+        font-family: var(--sans);
+        font-size: 22px;
+        font-weight: 600;
+        color: var(--muted);
+        opacity: 0;
+      }
+
+      /* ---------- scene 5 ---------- */
+
+      #s5 .h1 {
+        font-size: 92px;
+      }
+
+      #s5 .cmd-intro {
+        margin-top: 12px;
+        font-size: 21px;
+        color: var(--muted);
+      }
+
+      #s5 .cmd-intro code {
+        font-family: var(--mono);
+        font-size: 19px;
+        color: var(--blue);
+        background: var(--blue-soft);
+        padding: 2px 6px;
+      }
+
+      #s5 .term {
+        position: absolute;
+        left: 104px;
+        right: 80px;
+        top: 390px;
+      }
+
+      #s5 .term-body {
+        font-size: 16px;
+        line-height: 1.5;
+      }
+
+      #s5 .cmd-line {
+        display: block;
+        clip-path: inset(0 100% 0 0);
+      }
+
+      #s5 .out-card {
+        position: absolute;
+        left: 104px;
+        right: 80px;
+        top: 740px;
+        border: 2px solid var(--ink);
+        background: var(--card);
+        padding: 13px 17px 14px;
+        opacity: 0;
+      }
+
+      #s5 .out-k {
+        font-family: var(--mono);
+        font-size: 13px;
+        font-weight: 800;
+        letter-spacing: 0.14em;
+        color: var(--red);
+      }
+
+      #s5 .out-line {
+        font-family: var(--mono);
+        font-size: 19px;
+        font-weight: 600;
+        margin-top: 5px;
+      }
+
+      #s5 .out-line b {
+        color: var(--blue);
+      }
+
+      #s5 .out-meta {
+        font-family: var(--mono);
+        font-size: 15px;
+        color: var(--muted);
+        margin-top: 2px;
+      }
+
+      #s5 .out-note {
+        font-size: 15px;
+        font-weight: 700;
+        color: var(--red);
+        margin-top: 4px;
+        opacity: 0;
+      }
+
+      #s5 .caption {
+        position: absolute;
+        left: 104px;
+        right: 80px;
+        bottom: 160px;
+        font-family: var(--serif);
+        font-size: 38px;
+        font-weight: 700;
+        opacity: 0;
+      }
+
+      /* ---------- scene 6 ---------- */
+
+      #s6 .h1 {
+        font-size: 88px;
+      }
+
+      #s6 .who-grid {
+        position: absolute;
+        left: 104px;
+        right: 80px;
+        top: 320px;
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 24px;
+      }
+
+      #s6 .who {
+        border-top: 5px solid var(--green);
+        padding-top: 9px;
+        opacity: 0;
+      }
+
+      #s6 .who.no {
+        border-color: var(--red);
+      }
+
+      #s6 .who h3 {
+        font-size: 24px;
+        font-weight: 800;
+        margin-bottom: 7px;
+      }
+
+      #s6 .who ul {
+        list-style: none;
+      }
+
+      #s6 .who li {
+        position: relative;
+        padding-left: 24px;
+        margin-bottom: 6px;
+        font-size: 18px;
+        line-height: 1.4;
+        font-weight: 500;
+      }
+
+      #s6 .who li::before {
+        content: "✓";
+        position: absolute;
+        left: 0;
+        top: -2px;
+        font-family: var(--mono);
+        font-size: 19px;
+        font-weight: 800;
+        color: var(--green);
+      }
+
+      #s6 .who.no li::before {
+        content: "×";
+        color: var(--red);
+      }
+
+      #s6 .cost {
+        position: absolute;
+        left: 104px;
+        right: 80px;
+        top: 600px;
+        background: var(--yellow);
+        border: 2px solid var(--ink);
+        padding: 10px 15px;
+        font-size: 19px;
+        font-weight: 700;
+        opacity: 0;
+      }
+
+      #s6 .repo {
+        position: absolute;
+        left: 104px;
+        right: 80px;
+        top: 665px;
+        background: var(--terminal);
+        color: var(--terminal-ink);
+        border: 2px solid #000;
+        padding: 16px 20px;
+        opacity: 0;
+      }
+
+      #s6 .repo .k {
+        font-family: var(--mono);
+        font-size: 13px;
+        font-weight: 700;
+        letter-spacing: 0.14em;
+        color: #9f9789;
+      }
+
+      #s6 .repo .name {
+        font-family: var(--mono);
+        font-size: 31px;
+        font-weight: 800;
+        margin-top: 2px;
+      }
+
+      #s6 .repo .meta {
+        font-family: var(--mono);
+        font-size: 14px;
+        line-height: 1.4;
+        color: #b9b0a1;
+        margin-top: 2px;
+      }
+
+      #s6 .end-band {
+        position: absolute;
+        left: 80px;
+        right: 80px;
+        bottom: 240px;
+        background: var(--terminal);
+        color: var(--terminal-ink);
+        border: 2px solid #000;
+        padding: 20px 24px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        opacity: 0;
+      }
+
+      #s6 .end-band .t {
+        font-family: var(--serif);
+        font-size: 32px;
+        font-weight: 700;
+      }
+
+      #s6 .end-band .w {
+        font-family: var(--mono);
+        font-size: 18px;
+        font-weight: 700;
+        letter-spacing: 0.08em;
+        color: #b9b0a1;
+      }
+
+      /* ---------- v2 layout: fill the vertical frame ---------- */
+
+      #s1 .cover-cards {
+        position: absolute;
+        left: 104px;
+        right: 80px;
+        top: 640px;
+        display: flex;
+        align-items: center;
+        gap: 16px;
+      }
+
+      #s1 .clip {
+        position: relative;
+        width: 392px;
+        background: var(--card);
+        border: 2px solid var(--ink);
+        padding: 18px 18px 16px;
+        opacity: 0;
+      }
+
+      #s1 .clip.right { border-color: var(--green); }
+
+      #s1 .clip-k {
+        font-family: var(--mono);
+        font-size: 14px;
+        font-weight: 600;
+        color: var(--muted);
+      }
+
+      #s1 .clip-t {
+        font-size: 20px;
+        font-weight: 700;
+        line-height: 1.3;
+        margin-top: 5px;
+      }
+
+      #s1 .clip-n {
+        font-size: 54px;
+        font-weight: 800;
+        letter-spacing: -2px;
+        line-height: 1.05;
+        color: var(--red);
+        margin-top: 9px;
+      }
+
+      #s1 .clip.right .clip-n { color: var(--green); }
+
+      #s1 .clip-n span {
+        font-size: 17px;
+        font-weight: 600;
+        letter-spacing: 0;
+        color: var(--muted);
+        margin-left: 4px;
+      }
+
+      #s1 .clip-m {
+        font-family: var(--mono);
+        font-size: 18px;
+        font-weight: 600;
+        color: var(--muted);
+        margin-top: 2px;
+      }
+
+      #s1 .clip-stamp {
+        position: absolute;
+        right: 12px;
+        bottom: 10px;
+        font-size: 18px;
+        padding: 5px 9px 3px;
+        opacity: 0;
+      }
+
+      #s1 .between {
+        width: 42px;
+        opacity: 0;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 4px;
+        color: var(--red);
+      }
+
+      #s1 .between svg { width: 40px; height: 20px; }
+
+      #s1 .between span {
+        font-family: var(--mono);
+        font-size: 12px;
+        font-weight: 700;
+        white-space: nowrap;
+      }
+
+      #s1 .index-strip {
+        position: absolute;
+        left: 104px;
+        right: 80px;
+        top: 930px;
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        border-top: 2px solid var(--ink);
+        border-bottom: 1px solid var(--line);
+        opacity: 0;
+      }
+
+      #s1 .index-item {
+        padding: 10px 13px 11px;
+        border-right: 1px solid var(--line);
+      }
+
+      #s1 .index-item:last-child { border-right: 0; }
+
+      #s1 .index-item .k {
+        font-family: var(--mono);
+        font-size: 12px;
+        font-weight: 800;
+        letter-spacing: 0.14em;
+        color: var(--red);
+      }
+
+      #s1 .index-item .v {
+        font-size: 19px;
+        font-weight: 700;
+        margin-top: 4px;
+      }
+
+      #s1 .index-item .d {
+        font-size: 14px;
+        color: var(--muted);
+        margin-top: 2px;
+      }
+
+      #s1 .cover-foot { bottom: 180px; }
+
+      #s3 .strip { top: 930px; }
+      #s5 .strip { top: 890px; }
+
+      /* generic bottom strip for scenes 3 and 5 */
+      .strip {
+        position: absolute;
+        left: 104px;
+        right: 80px;
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        border-top: 2px solid var(--ink);
+        border-bottom: 1px solid var(--line);
+        opacity: 0;
+      }
+
+      .strip-item {
+        padding: 10px 13px 11px;
+        border-right: 1px solid var(--line);
+      }
+
+      .strip-item:last-child { border-right: 0; }
+
+      .strip-item .k {
+        font-family: var(--mono);
+        font-size: 12px;
+        font-weight: 800;
+        letter-spacing: 0.14em;
+        color: var(--red);
+      }
+
+      .strip-item .v {
+        font-size: 19px;
+        font-weight: 700;
+        margin-top: 4px;
+      }
+
+      .strip-item .d {
+        font-size: 14px;
+        color: var(--muted);
+        margin-top: 2px;
+      }
+
+      /* closing page */
+      #s6 .closing {
+        position: absolute;
+        left: 104px;
+        right: 80px;
+        top: 880px;
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        border-top: 2px solid var(--ink);
+        border-bottom: 1px solid var(--line);
+        opacity: 0;
+      }
+
+      #s6 .closing-item {
+        padding: 11px 15px 12px;
+        border-right: 1px solid var(--line);
+      }
+
+      #s6 .closing-item:last-child { border-right: 0; }
+
+      #s6 .closing-item .k {
+        font-family: var(--mono);
+        font-size: 12px;
+        font-weight: 800;
+        letter-spacing: 0.14em;
+        color: var(--red);
+      }
+
+      #s6 .closing-item .v {
+        font-size: 18px;
+        font-weight: 600;
+        line-height: 1.4;
+        margin-top: 3px;
+      }
+
+    </style>
+  </head>
+
+  <body>
+    <div
+      id="root"
+      data-composition-id="main"
+      data-start="0"
+      data-duration="40"
+      data-width="1080"
+      data-height="1440"
+    >
+      <!-- 1 · hook -->
+      <section id="s1" class="clip scene" data-start="0" data-duration="4.5" data-track-index="1">
+        <div class="paper-bg"></div>
+        <div class="content">
+          <div class="masthead">
+            <div class="brand">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="12" cy="5" r="2.5"></circle>
+                <path d="M12 7.5V21M5 14c0 4 3.5 7 7 7s7-3 7-7M3 14h4M17 14h4"></path>
+              </svg>
+              seekport
+            </div>
+            <div class="meta">DeepSeek 模型 · 非官方 DSH</div>
+          </div>
+
+          <div class="kicker">一个真实的 AI 翻车现场</div>
+          <h1 class="h1">
+            <span class="line first"><span>AI 查的资料，</span></span>
+            <span class="line"><span>可能是</span></span>
+            <span class="line"><span><span class="marker">二手的</span>。</span></span>
+          </h1>
+          <p class="lede">不是它笨，是它根本没打开原文。</p>
+          <div class="cover-cards">
+            <div class="clip left">
+              <div class="clip-k">某技术文章 · 2026-10</div>
+              <div class="clip-t">DeepSeek 搜索 API 定价</div>
+              <div class="clip-n">$0.75<span>/ 千次</span></div>
+              <div class="clip-m">5 QPS</div>
+              <div class="stamp red clip-stamp">二手</div>
+            </div>
+            <div class="between">
+              <svg viewBox="0 0 60 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M2 12h50M44 5l9 7-9 7"></path>
+              </svg>
+              <span>打开原文</span>
+            </div>
+            <div class="clip right">
+              <div class="clip-k">官方文档 · 2026-11</div>
+              <div class="clip-t">DeepSeek Search / Fetch</div>
+              <div class="clip-n">¥5<span>/ 千次</span></div>
+              <div class="clip-m">Search 100 QPS</div>
+              <div class="stamp green clip-stamp">已核对</div>
+            </div>
+          </div>
+
+          <div class="index-strip">
+            <div class="index-item"><div class="k">左边</div><div class="v">搜索摘要</div><div class="d">快，但可能过期</div></div>
+            <div class="index-item"><div class="k">右边</div><div class="v">官方原文</div><div class="d">慢一点，能核对</div></div>
+            <div class="index-item"><div class="k">seekport</div><div class="v">两件事都做</div><div class="d">搜候选 → 抓原文</div></div>
+          </div>
+
+          <div class="cover-foot">
+            <span class="a">开源 · 零依赖 · MIT</span>
+            <span class="b">我给 Claude Code 接了个官方搜索 →</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- 2 · the error -->
+      <section id="s2" class="clip scene" data-start="4.5" data-duration="6.5" data-track-index="2">
+        <div class="paper-bg"></div>
+        <div class="content">
+          <div class="masthead">
+            <div class="brand">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="12" cy="5" r="2.5"></circle>
+                <path d="M12 7.5V21M5 14c0 4 3.5 7 7 7s7-3 7-7M3 14h4M17 14h4"></path>
+              </svg>
+              seekport
+            </div>
+            <div class="meta">DeepSeek · 非 DSH</div>
+          </div>
+          <div class="kicker">WHERE IT BREAKS</div>
+          <h1 class="h1">
+            <span class="line"><span>报错的那一行，</span></span>
+            <span class="line"><span>你可能见过。</span></span>
+          </h1>
+
+          <div class="term-wrap">
+            <div class="term">
+              <div class="term-bar">
+                <span class="term-dot"></span><span class="term-dot"></span><span class="term-dot"></span>
+                &nbsp;Claude Code · WebFetch
+              </div>
+              <div class="term-body"><span class="cmd">$ WebFetch https://api-docs.deepseek.com/zh-cn/guides/search</span>
+<span class="err">✗ Unable to verify if domain is safe to fetch.</span>
+<span class="dim">This may be due to network restrictions or enterprise
+security policies blocking claude.ai.</span></div>
+            </div>
+            <svg class="ellipse" viewBox="0 0 896 300" preserveAspectRatio="none">
+              <path d="M40,118 C210,88 690,88 854,118 C878,132 690,154 448,152 C205,150 28,140 40,118" />
+            </svg>
+          </div>
+
+          <div class="pen-note">不是网络断了，<br />是网关不认这个域名。</div>
+
+          <div class="bullets">
+            <div class="bullet"><span class="x">×</span><span>内置搜索 <span class="muted">— 也用不了</span></span></div>
+            <div class="bullet"><span class="x">×</span><span>二手摘要 <span class="muted">— 可能已经过期</span></span></div>
+            <div class="bullet"><span class="x">×</span><span>问它出处 <span class="muted">— 它也说不清</span></span></div>
+          </div>
+
+          <div class="punch">模型不笨，它只是<span class="punch-u">看不到原文</span>。</div>
+        </div>
+      </section>
+
+      <!-- 3 · the receipt -->
+      <section id="s3" class="clip scene" data-start="11" data-duration="8" data-track-index="3">
+        <div class="paper-bg"></div>
+        <div class="content">
+          <div class="masthead">
+            <div class="brand">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="12" cy="5" r="2.5"></circle>
+                <path d="M12 7.5V21M5 14c0 4 3.5 7 7 7s7-3 7-7M3 14h4M17 14h4"></path>
+              </svg>
+              seekport
+            </div>
+            <div class="meta">翻车现场 · 02</div>
+          </div>
+          <div class="kicker">THE RECEIPT</div>
+          <h1 class="h1">
+            <span class="line"><span>同一个问题，</span></span>
+            <span class="line"><span>两种答案。</span></span>
+          </h1>
+
+          <div class="compare">
+            <div>
+              <div class="col-head"><span class="t">搜索到的</span><span class="s">3 篇二手文章</span></div>
+              <div class="stale">
+                <div class="t">DeepSeek 搜索 API 正式开放</div>
+                <div class="m">某云厂商 · 2026-10-18</div>
+                <div class="n">$0.75 / 千次 · 5 QPS</div>
+              </div>
+              <div class="stale">
+                <div class="t">DeepSeek Search API 怎么收费？</div>
+                <div class="m">某技术社区 · 2026-10-26</div>
+                <div class="n">$0.75 / 千次 · 5 QPS</div>
+              </div>
+              <div class="stale">
+                <div class="t">DeepSeek 搜索工具接入指南</div>
+                <div class="m">GitHub 项目 README · 2026-10</div>
+                <div class="n">$0.75 / 千次 · 5 QPS</div>
+              </div>
+              <div class="stamp red stale-stamp">都过期了</div>
+            </div>
+
+            <div>
+              <div class="col-head"><span class="t">官方原文</span><span class="s">api-docs.deepseek.com</span></div>
+              <div class="official">
+                <div class="k">DEEPSEEK 官方文档 · 计费</div>
+                <div class="big">¥5<span>/ 1,000 次成功请求</span></div>
+                <div class="line">Search 100 QPS<br />Fetch 25 QPS</div>
+                <div class="line">空结果 / 失败请求不计费</div>
+                <div class="stamp green">已核对</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="verdict"><span class="k">所以</span><span class="t">看到搜索结果，先别让 AI 下结论；让它 fetch 官方页，再引用。</span></div>
+
+          <div class="statement">搜索只给候选。<br />原文，才有答案。</div>
+        </div>
+      </section>
+
+      <!-- 4 · the bridge -->
+      <section id="s4" class="clip scene" data-start="19" data-duration="7" data-track-index="4">
+        <div class="paper-bg"></div>
+        <div class="content">
+          <div class="masthead">
+            <div class="brand">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="12" cy="5" r="2.5"></circle>
+                <path d="M12 7.5V21M5 14c0 4 3.5 7 7 7s7-3 7-7M3 14h4M17 14h4"></path>
+              </svg>
+              seekport
+            </div>
+            <div class="meta">它是什么 · 03</div>
+          </div>
+          <div class="kicker">WHAT IT IS</div>
+          <h1 class="h1">
+            <span class="line"><span>一座小桥，</span></span>
+            <span class="line"><span>补上「搜」和「抓」。</span></span>
+          </h1>
+
+          <div class="flow">
+            <div class="flow-spine"></div>
+            <div class="flow-item">
+              <div class="flow-no">1</div>
+              <div class="flow-card">
+                <div class="flow-label">YOUR AGENT</div>
+                <div class="flow-main">Claude Code · Codex · Zcode</div>
+                <div class="flow-sub">跑 DeepSeek 模型 · 非官方 DSH</div>
+              </div>
+            </div>
+            <div class="flow-item">
+              <div class="flow-no">2</div>
+              <div class="flow-card hot">
+                <div class="flow-label">THE BRIDGE</div>
+                <div class="flow-main">seekport</div>
+                <div class="flow-sub">Skill 或 MCP · 同一份核心</div>
+                <div class="tags"><span class="tag">零依赖</span><span class="tag">标准库</span><span class="tag">290 行</span></div>
+              </div>
+            </div>
+            <div class="flow-item">
+              <div class="flow-no">3</div>
+              <div class="flow-card">
+                <div class="flow-label">OFFICIAL API</div>
+                <div class="flow-main">DeepSeek Search / Fetch</div>
+                <div class="flow-sub">/v1/tools/search · /v1/tools/fetch</div>
+              </div>
+            </div>
+            <div class="flow-item">
+              <div class="flow-no">4</div>
+              <div class="flow-card">
+                <div class="flow-label">THE SOURCE</div>
+                <div class="flow-main">网页原文</div>
+                <div class="flow-sub">标题 · 摘要 · 排序分 · 权威度 · 链接</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="flow-verdict"><span class="k">一句话</span><span class="t">前提：DeepSeek 模型 + 非 DSH；用 DSH 不需要它。</span></div>
+          <div class="flow-caption">搜到候选 → 抓原文 → 引用链接。全程不用爬虫。</div>
+        </div>
+      </section>
+
+      <!-- 5 · commands -->
+      <section id="s5" class="clip scene" data-start="26" data-duration="7" data-track-index="5">
+        <div class="paper-bg"></div>
+        <div class="content">
+          <div class="masthead">
+            <div class="brand">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="12" cy="5" r="2.5"></circle>
+                <path d="M12 7.5V21M5 14c0 4 3.5 7 7 7s7-3 7-7M3 14h4M17 14h4"></path>
+              </svg>
+              seekport
+            </div>
+            <div class="meta">怎么用 · 04</div>
+          </div>
+          <div class="kicker">TWO COMMANDS</div>
+          <h1 class="h1">
+            <span class="line"><span>两条命令，</span></span>
+            <span class="line"><span>就够了。</span></span>
+          </h1>
+
+          <div class="term">
+            <div class="term-bar">
+              <span class="term-dot"></span><span class="term-dot"></span><span class="term-dot"></span>
+              &nbsp;终端 · zsh
+            </div>
+            <div class="term-body"><span class="cmd-line dim"># 1. 搜候选，先看标题和摘要</span>
+<span class="cmd-line cmd">python3 $CLI search \</span>
+<span class="cmd-line cmd">  "DeepSeek 搜索 API 计费 site:api-docs.deepseek.com" --md</span>
+<span class="cmd-line dim"># 2. 命中官方页，再抓全文</span>
+<span class="cmd-line cmd">python3 $CLI fetch \</span>
+<span class="cmd-line cmd">  "https://api-docs.deepseek.com/zh-cn/guides/search" --md</span></div>
+          </div>
+
+          <div class="out-card">
+            <div class="out-k">SEARCH 输出 · 节选</div>
+            <div class="out-line"><b>## 1.</b> 某云厂商 · 2026-10-18</div>
+            <div class="out-meta">score 2.36 · auth 3</div>
+            <div class="out-note">只是候选，别停在这里。</div>
+          </div>
+
+          <div class="strip">
+            <div class="strip-item"><div class="k">search</div><div class="v">给候选</div><div class="d">标题 · 摘要 · 分数</div></div>
+            <div class="strip-item"><div class="k">fetch</div><div class="v">给原文</div><div class="d">Markdown 正文</div></div>
+            <div class="strip-item"><div class="k">引用</div><div class="v">给 URL</div><div class="d">可以回查</div></div>
+          </div>
+
+          <div class="caption">先搜候选，再抓原文。</div>
+        </div>
+      </section>
+
+      <!-- 6 · who + end -->
+      <section id="s6" class="clip scene" data-start="33" data-duration="7" data-track-index="6">
+        <div class="paper-bg"></div>
+        <div class="content">
+          <div class="masthead">
+            <div class="brand">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="12" cy="5" r="2.5"></circle>
+                <path d="M12 7.5V21M5 14c0 4 3.5 7 7 7s7-3 7-7M3 14h4M17 14h4"></path>
+              </svg>
+              seekport
+            </div>
+            <div class="meta">说清楚 · 05</div>
+          </div>
+          <div class="kicker">DEEPSEEK 模型 · 非官方 DSH</div>
+          <h1 class="h1">
+            <span class="line"><span>适合谁，</span></span>
+            <span class="line"><span>不适合谁。</span></span>
+          </h1>
+
+          <div class="who-grid">
+            <section class="who">
+              <h3>适合</h3>
+              <ul>
+                <li>Claude Code（DeepSeek、非 DSH）</li>
+                <li>用 DeepSeek 模型的 Codex / Zcode</li>
+                <li>要引用官方原文的科研、写作者</li>
+              </ul>
+            </section>
+            <section class="who no">
+              <h3>不适合</h3>
+              <ul>
+                <li>用官方 DSH 的人（不需要它）</li>
+                <li>想要通用搜索引擎的人</li>
+                <li>完全不想碰命令行的人</li>
+              </ul>
+            </section>
+          </div>
+
+          <div class="cost">¥5 / 1,000 次成功请求 · 约 ¥0.005 / 次 · 空结果不计费</div>
+
+          <div class="repo">
+            <div class="k">GITHUB</div>
+            <div class="name">ChemistryBus / seekport</div>
+            <div class="meta">MIT · 个人项目，不是 DeepSeek 官方</div>
+            <div class="meta">github.com/ChemistryBus/seekport</div>
+          </div>
+
+          <div class="closing">
+            <div class="closing-item"><div class="k">README</div><div class="v">安装 · 搜索语法 · 错误表 · 中英双语</div></div>
+            <div class="closing-item"><div class="k">参与</div><div class="v">提 Issue · 点 star · 转给需要的人</div></div>
+          </div>
+
+          <div class="end-band">
+            <span class="t">让 AI 打开原文。</span>
+            <span class="w">seekport</span>
+          </div>
+        </div>
+      </section>
+      <audio id="vo1" src="assets/vo/01.mp3" data-start="0.35" data-volume="1"></audio>
+      <audio id="vo2" src="assets/vo/02.mp3" data-start="4.55" data-volume="1"></audio>
+      <audio id="vo3" src="assets/vo/03.mp3" data-start="11.10" data-volume="1"></audio>
+      <audio id="vo4" src="assets/vo/04.mp3" data-start="19.15" data-volume="1"></audio>
+      <audio id="vo5" src="assets/vo/05.mp3" data-start="26.30" data-volume="1"></audio>
+      <audio id="vo6" src="assets/vo/06.mp3" data-start="33.20" data-volume="1"></audio>
+    </div>
+
+    <script>
+      window.__timelines = window.__timelines || {};
+      const tl = gsap.timeline({ paused: true });
+
+      /* ---------- 1 · hook (0–4.5) ---------- */
+      tl.fromTo("#s1 .h1", { scale: 1.015 }, { scale: 1, duration: 1.1, ease: "power2.out", transformOrigin: "left top" }, 0);
+      tl.fromTo("#s1 .marker", { backgroundSize: "0% 26px" }, { backgroundSize: "100% 26px", duration: 0.55, ease: "power2.out" }, 0.75);
+      tl.fromTo("#s1 .lede", { opacity: 0, y: 16 }, { opacity: 1, y: 0, duration: 0.5, ease: "power2.out" }, 1.35);
+      tl.fromTo("#s1 .clip.left", { opacity: 0, y: 24, rotation: -2 }, { opacity: 1, y: 0, rotation: -2, duration: 0.45, ease: "power3.out" }, 1.85);
+      tl.fromTo("#s1 .clip.right", { opacity: 0, y: 24, rotation: 2 }, { opacity: 1, y: 0, rotation: 2, duration: 0.45, ease: "power3.out" }, 2.2);
+      tl.fromTo("#s1 .between", { opacity: 0 }, { opacity: 1, duration: 0.3 }, 2.3);
+      tl.fromTo(
+        "#s1 .clip-stamp",
+        { opacity: 0, scale: 1.6, rotation: -16 },
+        { opacity: 1, scale: 1, rotation: -7, duration: 0.3, stagger: 0.12, ease: "back.out(2)" },
+        2.55,
+      );
+      tl.fromTo("#s1 .index-strip", { opacity: 0, y: 12 }, { opacity: 1, y: 0, duration: 0.4 }, 2.9);
+      tl.fromTo("#s1 .cover-foot", { opacity: 0 }, { opacity: 1, duration: 0.4 }, 3.3);
+
+      /* ---------- 2 · error (4.5–11) ---------- */
+      tl.fromTo("#s2 .kicker", { opacity: 0, y: 10 }, { opacity: 1, y: 0, duration: 0.35 }, 4.65);
+      tl.fromTo("#s2 .line > span", { y: "112%" }, { y: "0%", duration: 0.6, ease: "power4.out", stagger: 0.2 }, 4.75);
+      tl.fromTo("#s2 .term-wrap", { opacity: 0, y: 26 }, { opacity: 1, y: 0, duration: 0.5, ease: "power3.out" }, 5.35);
+      tl.fromTo("#s2 .ellipse path", { strokeDashoffset: 1700 }, { strokeDashoffset: 0, duration: 0.9, ease: "power2.inOut" }, 6.5);
+      tl.fromTo("#s2 .pen-note", { opacity: 0, x: 20 }, { opacity: 1, x: 0, duration: 0.45 }, 7.3);
+      tl.fromTo("#s2 .bullet", { opacity: 0, x: -18 }, { opacity: 1, x: 0, duration: 0.35, stagger: 0.15 }, 7.9);
+      tl.fromTo("#s2 .punch", { opacity: 0, y: 18 }, { opacity: 1, y: 0, duration: 0.5 }, 9.2);
+      tl.fromTo("#s2 .punch-u", { scaleX: 0 }, { scaleX: 1, duration: 0.4, ease: "power2.out" }, 9.7);
+
+      /* ---------- 3 · receipt (11–19) ---------- */
+      tl.fromTo("#s3 .kicker", { opacity: 0, y: 10 }, { opacity: 1, y: 0, duration: 0.35 }, 11.15);
+      tl.fromTo("#s3 .line > span", { y: "112%" }, { y: "0%", duration: 0.6, ease: "power4.out", stagger: 0.2 }, 11.25);
+      tl.fromTo("#s3 .stale", { opacity: 0, y: 18 }, { opacity: 1, y: 0, duration: 0.35, stagger: 0.18 }, 11.85);
+      tl.fromTo(
+        "#s3 .stale-stamp",
+        { opacity: 0, scale: 1.6, rotation: -18 },
+        { opacity: 1, scale: 1, rotation: -7, duration: 0.32, ease: "back.out(2)" },
+        13.3,
+      );
+      tl.fromTo("#s3 .official", { opacity: 0, x: 70 }, { opacity: 1, x: 0, duration: 0.5, ease: "power3.out" }, 13.9);
+      tl.fromTo("#s3 .official .big", { opacity: 0, scale: 0.85 }, { opacity: 1, scale: 1, duration: 0.4, ease: "back.out(1.6)" }, 14.4);
+      tl.fromTo(
+        "#s3 .official .stamp",
+        { opacity: 0, scale: 1.5, rotation: -14 },
+        { opacity: 1, scale: 1, rotation: -7, duration: 0.3, ease: "back.out(2)" },
+        15.3,
+      );
+      tl.fromTo("#s3 .verdict", { opacity: 0, y: 12 }, { opacity: 1, y: 0, duration: 0.4 }, 16.0);
+      tl.fromTo("#s3 .statement", { opacity: 0, y: 18 }, { opacity: 1, y: 0, duration: 0.5 }, 16.7);
+
+      /* ---------- 4 · bridge (19–26) ---------- */
+      tl.fromTo("#s4 .kicker", { opacity: 0, y: 10 }, { opacity: 1, y: 0, duration: 0.35 }, 19.15);
+      tl.fromTo("#s4 .line > span", { y: "112%" }, { y: "0%", duration: 0.6, ease: "power4.out", stagger: 0.2 }, 19.25);
+      tl.fromTo("#s4 .flow-spine", { height: 0 }, { height: "100%", duration: 1.1, ease: "power2.inOut" }, 19.85);
+      tl.fromTo("#s4 .flow-item", { opacity: 0, x: 18 }, { opacity: 1, x: 0, duration: 0.35, stagger: 0.22 }, 20.0);
+      tl.fromTo("#s4 .flow-card.hot", { scale: 0.985 }, { scale: 1, duration: 0.3, ease: "power2.out" }, 21.5);
+      tl.fromTo("#s4 .flow-verdict", { opacity: 0, y: 12 }, { opacity: 1, y: 0, duration: 0.4 }, 23.0);
+      tl.fromTo("#s4 .flow-caption", { opacity: 0 }, { opacity: 1, duration: 0.4 }, 23.6);
+
+      /* ---------- 5 · commands (26–33) ---------- */
+      tl.fromTo("#s5 .kicker", { opacity: 0, y: 10 }, { opacity: 1, y: 0, duration: 0.35 }, 26.15);
+      tl.fromTo("#s5 .line > span", { y: "112%" }, { y: "0%", duration: 0.6, ease: "power4.out", stagger: 0.2 }, 26.25);
+      tl.fromTo("#s5 .term", { opacity: 0, y: 24 }, { opacity: 1, y: 0, duration: 0.45 }, 27.0);
+      tl.fromTo(
+        "#s5 .cmd-line",
+        { clipPath: "inset(0 100% 0 0)" },
+        { clipPath: "inset(0 0% 0 0)", duration: 0.55, stagger: 0.28, ease: "none" },
+        27.35,
+      );
+      tl.fromTo("#s5 .out-card", { opacity: 0, y: 18 }, { opacity: 1, y: 0, duration: 0.4 }, 29.5);
+      tl.fromTo("#s5 .out-note", { opacity: 0 }, { opacity: 1, duration: 0.25 }, 30.0);
+      tl.fromTo("#s5 .strip", { opacity: 0, y: 12 }, { opacity: 1, y: 0, duration: 0.4 }, 30.4);
+      tl.fromTo("#s5 .caption", { opacity: 0 }, { opacity: 1, duration: 0.4 }, 31.0);
+
+      /* ---------- 6 · who + end (33–40) ---------- */
+      tl.fromTo("#s6 .kicker", { opacity: 0, y: 10 }, { opacity: 1, y: 0, duration: 0.35 }, 33.15);
+      tl.fromTo("#s6 .line > span", { y: "112%" }, { y: "0%", duration: 0.6, ease: "power4.out", stagger: 0.2 }, 33.25);
+      tl.fromTo("#s6 .who", { opacity: 0, y: 18 }, { opacity: 1, y: 0, duration: 0.4, stagger: 0.15 }, 33.9);
+      tl.fromTo("#s6 .cost", { opacity: 0 }, { opacity: 1, duration: 0.3 }, 34.7);
+      tl.fromTo("#s6 .repo", { opacity: 0, y: 18 }, { opacity: 1, y: 0, duration: 0.4 }, 35.2);
+      tl.fromTo("#s6 .closing", { opacity: 0, y: 12 }, { opacity: 1, y: 0, duration: 0.4 }, 35.9);
+      tl.fromTo("#s6 .end-band", { opacity: 0, y: 18 }, { opacity: 1, y: 0, duration: 0.4 }, 37.1);
+
+      window.__timelines["main"] = tl;
+    </script>
+  </body>
+</html>
