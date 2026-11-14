@@ -4,7 +4,7 @@
 
 <p align="center"><strong>把 DeepSeek 官方的 Search / Fetch API 接到 Claude Code、Codex、Zcode 以及其他 agent harness</strong></p>
 <p align="center">零依赖 · Agent Skill + MCP · 先搜索候选，再抓取原文</p>
-<p align="center"><strong>v0.1.2 — README Layout and Table Alignment</strong></p>
+<p align="center"><strong>v0.1.3 — Full-width Tables and Bilingual About</strong></p>
 
 <p align="center">
   <a href="https://github.com/ChemistryBus/seekport/actions/workflows/test.yml"><img src="https://github.com/ChemistryBus/seekport/actions/workflows/test.yml/badge.svg" alt="tests"></a>
@@ -78,6 +78,7 @@ python3 scripts/cli.py fetch "https://api-docs.deepseek.com/zh-cn/guides/search"
     <tr><td>查官方 API 文档</td><td><code>site:api-docs.deepseek.com</code></td><td>官网优先，避免二手文章</td></tr>
     <tr><td>查最新进展</td><td><code>after:2025 lang:en</code></td><td>限定年份和语言</td></tr>
     <tr><td>引用原文</td><td><code>fetch &lt;url&gt;</code></td><td>搜索只是候选，原文才可引用</td></tr>
+    <tr><td colspan="3">注：搜索返回的是候选，适合先看摘要；要引用原文，再对具体 URL 执行 fetch。多个站点可以用 OR 组合 site:，例如 site:github.com OR site:huggingface.co。</td></tr>
   </tbody>
 </table>
 
@@ -104,6 +105,7 @@ python3 scripts/cli.py fetch "https://api-docs.deepseek.com/zh-cn/guides/search"
     <tr><td><code>-词</code></td><td>排除词</td></tr>
     <tr><td><code>lang:zh,en</code></td><td>限定语言</td></tr>
     <tr><td><code>after:</code> / <code>before:</code></td><td>限定时间</td></tr>
+    <tr><td colspan="2">注：多个操作符可以组合使用，空格分隔；搜索语法会原样传给 DeepSeek，不会在本地解析或改写。引号内可以包含空格，-词 用于排除。</td></tr>
   </tbody>
 </table>
 
@@ -116,6 +118,7 @@ python3 scripts/cli.py fetch "https://api-docs.deepseek.com/zh-cn/guides/search"
     <tr><td><code>--md</code></td><td>输出 Markdown 而非 JSON</td></tr>
     <tr><td><code>--content</code></td><td>让 API 返回网页正文（更大更慢）</td></tr>
     <tr><td><code>--ori-question</code></td><td>用户原始问题，帮助理解搜索意图</td></tr>
+    <tr><td colspan="2">注：--count 只影响返回条数，不影响单次价格；--min-rerank 0 会保留所有有分数的结果，--min-authority 3 只保留高权威来源。过滤在本地完成。</td></tr>
   </tbody>
 </table>
 
@@ -145,6 +148,7 @@ python3 scripts/cli.py fetch "https://api-docs.deepseek.com/zh-cn/guides/search"
     <tr><td>两种形态</td><td>Agent Skill 或 stdio MCP server（<code>deepseek_search</code> / <code>deepseek_fetch</code>），共用同一份核心</td></tr>
     <tr><td>成本护栏</td><td>408 / 429 / 5xx 退避重试；拒绝重定向；<code>SEEKPORT_BUDGET</code> 每日预算</td></tr>
     <tr><td>零依赖</td><td>纯 Python 3.9+ 标准库，核心 <code>scripts/ds_core.py</code> 290 行</td></tr>
+    <tr><td colspan="2">注：核心逻辑在 scripts/ds_core.py，CLI 与 MCP 共用同一份实现；81 个单测全部 mock HTTP，不消耗额度。零依赖指运行时只用 Python 标准库。</td></tr>
   </tbody>
 </table>
 
@@ -167,6 +171,7 @@ python3 scripts/cli.py fetch "https://api-docs.deepseek.com/zh-cn/guides/search"
     <tr><td>Codex</td><td>安装说明已写；未在客户端内部逐一验证</td></tr>
     <tr><td>Zcode</td><td>安装说明已写；未在客户端内部逐一验证</td></tr>
     <tr><td>任意 MCP 客户端</td><td>MCP stdio 已实测；适合不能执行 shell 的 harness</td></tr>
+    <tr><td colspan="2">注：Claude Code、CLI 与 MCP stdio 已实测；Codex、Zcode 只写了安装说明，尚未在客户端内部逐一验证；Windows 未测试。每个 harness 只装一种形态。</td></tr>
   </tbody>
 </table>
 
@@ -207,6 +212,7 @@ python3 scripts/cli.py fetch "https://..." --md
     <tr><td>计费条件</td><td>HTTP 200 <strong>且</strong> Search 结果非空 / Fetch 有正文</td></tr>
     <tr><td>不计费</td><td>报错、超时、空搜索结果</td></tr>
     <tr><td>限速</td><td>Search <strong>100 QPS</strong>，Fetch <strong>25 QPS</strong>（按账号）</td></tr>
+    <tr><td colspan="2">注：价格与限速以 DeepSeek 官方文档为准；只有 HTTP 200 且结果非空才计费，空结果、报错和超时不计费。设置 SEEKPORT_BUDGET 可以限制每日花费。</td></tr>
   </tbody>
 </table>
 
@@ -254,6 +260,7 @@ DSH 用户直接用官方包；seekport 面向非 DSH harness、第三方网关�
     <tr><td>贡献指南</td><td><a href="CONTRIBUTING.md">CONTRIBUTING.md</a></td></tr>
     <tr><td>小红书 / 视频素材</td><td><a href="promo/README.md">promo/README.md</a></td></tr>
     <tr><td>发布说明</td><td><a href="https://github.com/ChemistryBus/seekport/releases">GitHub Releases</a></td></tr>
+    <tr><td colspan="2">注：中文 README 是默认入口，英文在 README.en.md；SKILL.md 是安装后的技能说明，examples/ 里是真实输出，promo/ 里是小红书和视频素材。</td></tr>
   </tbody>
 </table>
 

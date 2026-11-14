@@ -4,7 +4,7 @@
 
 <p align="center"><strong>Bridge DeepSeek's official Search / Fetch API to Claude Code, Codex, Zcode, and any other agent harness</strong></p>
 <p align="center">Zero dependencies · Agent Skill + MCP · search for candidates, then fetch the primary source</p>
-<p align="center"><strong>v0.1.2 — README Layout and Table Alignment</strong></p>
+<p align="center"><strong>v0.1.3 — Full-width Tables and Bilingual About</strong></p>
 
 <p align="center">
   <a href="https://github.com/ChemistryBus/seekport/actions/workflows/test.yml"><img src="https://github.com/ChemistryBus/seekport/actions/workflows/test.yml/badge.svg" alt="tests"></a>
@@ -78,6 +78,7 @@ No `pip install`. Requires Python 3.9+.
     <tr><td>Official API docs</td><td><code>site:api-docs.deepseek.com</code></td><td>Primary source, not secondary articles</td></tr>
     <tr><td>Recent work</td><td><code>after:2025 lang:en</code></td><td>Restrict year and language</td></tr>
     <tr><td>Cite the source</td><td><code>fetch &lt;url&gt;</code></td><td>Search gives candidates; the page is citable</td></tr>
+    <tr><td colspan="3">Note: search returns candidates; read the summary first. To cite, fetch the specific URL. Combine multiple sites with OR, e.g. site:github.com OR site:huggingface.co.</td></tr>
   </tbody>
 </table>
 
@@ -104,6 +105,7 @@ python3 scripts/cli.py fetch "https://api-docs.deepseek.com/zh-cn/guides/search"
     <tr><td><code>-term</code></td><td>Exclude a term</td></tr>
     <tr><td><code>lang:zh,en</code></td><td>Restrict language</td></tr>
     <tr><td><code>after:</code> / <code>before:</code></td><td>Restrict by date</td></tr>
+    <tr><td colspan="2">Note: operators can be combined with spaces and are passed through to DeepSeek unchanged; quoted phrases may contain spaces, and -term excludes a term.</td></tr>
   </tbody>
 </table>
 
@@ -116,6 +118,7 @@ python3 scripts/cli.py fetch "https://api-docs.deepseek.com/zh-cn/guides/search"
     <tr><td><code>--md</code></td><td>Markdown instead of JSON</td></tr>
     <tr><td><code>--content</code></td><td>Ask the API for full page text (larger, slower)</td></tr>
     <tr><td><code>--ori-question</code></td><td>The user's original question, for intent matching</td></tr>
+    <tr><td colspan="2">Note: --count changes result count, not price. --min-rerank 0 keeps all scored results; --min-authority 3 keeps highly authoritative pages. Filtering happens locally.</td></tr>
   </tbody>
 </table>
 
@@ -145,6 +148,7 @@ python3 scripts/cli.py fetch "https://api-docs.deepseek.com/zh-cn/guides/search"
     <tr><td>Two shapes</td><td>Agent Skill or stdio MCP server (<code>deepseek_search</code> / <code>deepseek_fetch</code>), sharing one core</td></tr>
     <tr><td>Cost guardrails</td><td>Retries 408 / 429 / 5xx; refuses redirects; optional daily cap via <code>SEEKPORT_BUDGET</code></td></tr>
     <tr><td>Zero dependencies</td><td>Python 3.9+ standard library only; the core <code>scripts/ds_core.py</code> is 290 lines</td></tr>
+    <tr><td colspan="2">Note: the core lives in scripts/ds_core.py and is shared by the CLI and MCP server. The 81 tests mock all HTTP, so they spend no credits; zero dependencies means the standard library only.</td></tr>
   </tbody>
 </table>
 
@@ -167,6 +171,7 @@ This is the developer's real run, not a third-party user case and not a general 
     <tr><td>Codex</td><td>Install instructions written; not verified inside the client</td></tr>
     <tr><td>Zcode</td><td>Install instructions written; not verified inside the client</td></tr>
     <tr><td>Any MCP client</td><td>MCP stdio verified; suits harnesses that cannot run shell commands</td></tr>
+    <tr><td colspan="2">Note: Claude Code, the CLI, and MCP stdio are verified. Codex and Zcode have install instructions but were not verified inside those clients; Windows is untested. Install one shape per harness.</td></tr>
   </tbody>
 </table>
 
@@ -207,6 +212,7 @@ python3 scripts/cli.py fetch "https://..." --md
     <tr><td>Billed when</td><td>HTTP 200 <strong>and</strong> non-empty results (Search) / content (Fetch)</td></tr>
     <tr><td>Not billed</td><td>Errors, timeouts, empty searches</td></tr>
     <tr><td>Rate limits</td><td>Search <strong>100 QPS</strong>, Fetch <strong>25 QPS</strong> per account</td></tr>
+    <tr><td colspan="2">Note: prices and limits follow DeepSeek's official docs. Only HTTP 200 responses with non-empty results are billed; errors, timeouts, and empty searches are free. Set SEEKPORT_BUDGET to cap daily spend.</td></tr>
   </tbody>
 </table>
 
@@ -254,6 +260,7 @@ No. The key is read from `DEEPSEEK_API_KEY`; the repo contains no key; redirects
     <tr><td>Contributing</td><td><a href="CONTRIBUTING.md">CONTRIBUTING.md</a></td></tr>
     <tr><td>Xiaohongshu / video assets</td><td><a href="promo/README.md">promo/README.md</a></td></tr>
     <tr><td>Release notes</td><td><a href="https://github.com/ChemistryBus/seekport/releases">GitHub Releases</a></td></tr>
+    <tr><td colspan="2">Note: the Chinese README is the default; English lives in README.en.md. SKILL.md is the installed skill's instructions; examples/ contains real transcripts; promo/ contains the Xiaohongshu and video assets.</td></tr>
   </tbody>
 </table>
 
