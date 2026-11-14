@@ -26,7 +26,7 @@ sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 from errors import APIError, ConfigError, SeekportError  # noqa: E402,F401
 from spend import PRICE_RMB_PER_CALL, check as budget_check, record as budget_record  # noqa: E402,F401
 
-__version__ = "0.1.0"
+__version__ = "0.1.1"
 DEFAULT_COUNT, DEFAULT_MIN_RERANK = 10, 1.5
 MAX_QUERY_CHARS, MAX_URL_CHARS = 128, 8192
 MAX_RETRIES, DEFAULT_TIMEOUT = 3, 30
