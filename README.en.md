@@ -2,8 +2,8 @@
 
 <h1 align="center">seekport</h1>
 
-<p align="center"><strong>Bridge DeepSeek's official Search / Fetch API to Claude Code, Codex, Zcode, and any other agent harness</strong></p>
-<p align="center">Zero dependencies · Agent Skill + MCP · search for candidates, then fetch the primary source</p>
+<p align="center"><strong>Bridge DeepSeek's official Search / Fetch API to any agent</strong></p>
+<p align="center">Any model · any harness · zero dependencies · Agent Skill + MCP · search candidates, then fetch the primary source</p>
 <p align="center"><strong>v0.1.3 — Full-width Tables and Bilingual About</strong></p>
 
 <p align="center">
@@ -23,12 +23,15 @@ Search tools are not scarce. The hard part is **getting an agent to a citable pr
 
 `seekport` is not a crawler and not a search engine. It is a thin bridge: it sends a query or a URL to DeepSeek's official Search / Fetch API, gets back ranked results or Markdown, and hands them to the agent.
 
-It solves four concrete problems:
+**It does not require DeepSeek as the model.** As long as `DEEPSEEK_API_KEY` has credit, Claude, GPT, DeepSeek, and local models all work; so do Claude Code, Codex, Zcode, Cursor, or your own harness. Search / Fetch is a separate paid API, billed independently of model calls.
+
+It solves these concrete problems:
 
 - Behind a third-party gateway, Claude Code's `WebFetch` returns `Unable to verify if domain is safe to fetch`;
 - The harness has no usable web search, or cannot use DeepSeek's `site:` / `lang:` / `after:` operators and `rerank_score` / `authority` filters;
 - The agent can only cite secondary articles, which may be stale;
-- Harnesses differ: some can run shell commands, some can only call MCP tools.
+- Harnesses differ: some can run shell commands, some can only call MCP tools;
+- Your model is not DeepSeek, but you want DeepSeek's official Search / Fetch.
 
 **What it is not**: not a crawler (no HTML parsing, link following, or indexing); not a general search engine; not PubMed / Web of Science / Scopus; not an official DeepSeek project.
 
@@ -36,16 +39,39 @@ How it relates to other tools: DSH users should use `@deepseek-ai/dsh-web-deepse
 
 ## Quick start (30 seconds)
 
+### Prerequisite: a funded DeepSeek API key
+
+1. Create a key at <https://platform.deepseek.com/api_keys>.
+2. Top up the account. Search / Fetch is a paid API: ¥5 per 1,000 successful requests, about ¥0.005 per call; empty results and failures are free.
+3. Put the key in your environment; do not paste it into chat:
+
+```bash
+export DEEPSEEK_API_KEY=sk-...
+```
+
+Or write it to `~/.config/seekport/env` (`chmod 600`) and load it with `set -a; . ~/.config/seekport/env; set +a`.
+
+4. If you use DSH: use the official `@deepseek-ai/dsh-web-deepseek-api` package. You do not need seekport.
+
 ### Option 1: let an agent install it
 
 Paste this into Claude Code / Codex / Zcode:
 
 ```text
 Install the seekport Agent Skill. First confirm that writing to ~/.claude/skills is allowed, then:
-1. git clone https://github.com/ChemistryBus/seekport.git ~/.claude/skills/seekport
-2. Check that SKILL.md and scripts/cli.py exist
-3. Tell me how to set DEEPSEEK_API_KEY
+1. git clone https://github.com/ChemistryBus/seekport.git ~/seekport
+2. ln -s ~/seekport ~/.claude/skills/seekport
+3. Check that SKILL.md and scripts/cli.py exist
+4. Check whether DEEPSEEK_API_KEY is set (do not print the key)
+5. If it is not set, tell me where to export it or write it to ~/.config/seekport/env
 Do not read or upload my API key.
+```
+
+If the key is already in `~/.config/seekport/env`, you can say:
+
+```text
+My DeepSeek key is in ~/.config/seekport/env. Load it (do not print the key),
+then search with seekport for "Nutrients author guidelines site:mdpi.com" and show me the candidates.
 ```
 
 ### Option 2: manual install
@@ -59,6 +85,13 @@ export DEEPSEEK_API_KEY=sk-...
 Restart Claude Code, then say:
 
 > Use seekport to look up the latest Nutrients author guidelines.
+
+### After install: how to use it
+
+```text
+Search with seekport for "Nutrients author guidelines site:mdpi.com"; show me the candidates first.
+After I pick one, fetch the official page and give me the URL.
+```
 
 ### Try one search
 
@@ -126,13 +159,15 @@ python3 scripts/cli.py fetch "https://api-docs.deepseek.com/zh-cn/guides/search"
 
 **For:**
 
-- People running Claude Code / Codex / Zcode on DeepSeek;
+- Claude Code / Codex / Zcode / Cursor, or your own harness;
+- Any model: Claude, GPT, DeepSeek, or a local model, as long as `DEEPSEEK_API_KEY` has credit;
 - People behind a third-party gateway where `WebFetch` is blocked;
 - Researchers who need official docs, journal guidelines, or conference deadlines;
 - Anyone who wants results filtered before they reach the model.
 
 **Not for:**
 
+- DSH users: the official `@deepseek-ai/dsh-web-deepseek-api` package is better;
 - PubMed / Web of Science / Scopus-style literature databases;
 - Bulk crawling, indexing, or scheduled scraping;
 - People who do not want to pay for the DeepSeek API;
@@ -227,6 +262,14 @@ DSH users should use the official package. seekport is for non-DSH harnesses, th
 **Is it free?**
 
 The tool is MIT. DeepSeek's Search / Fetch API is paid: about ¥0.005 per call; empty results and errors are free.
+
+**Can I use it without a DeepSeek model?**
+
+Yes. seekport reads only `DEEPSEEK_API_KEY`; neither the model nor the harness is bound. DeepSeek's Search / Fetch is a separate API, billed independently of model calls.
+
+**How do I get and top up an API key?**
+
+Create a key at <https://platform.deepseek.com/api_keys> and add credit in the DeepSeek platform. Search / Fetch is billed per successful request; HTTP 402 means the balance is insufficient.
 
 **Does it work on Windows?**
 

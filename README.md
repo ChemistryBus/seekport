@@ -2,8 +2,8 @@
 
 <h1 align="center">seekport</h1>
 
-<p align="center"><strong>把 DeepSeek 官方的 Search / Fetch API 接到 Claude Code、Codex、Zcode 以及其他 agent harness</strong></p>
-<p align="center">零依赖 · Agent Skill + MCP · 先搜索候选，再抓取原文</p>
+<p align="center"><strong>把 DeepSeek 官方的 Search / Fetch API 接到任何 Agent</strong></p>
+<p align="center">不换模型 · 不挑 harness · 零依赖 · Agent Skill + MCP · 先搜索候选，再抓取原文</p>
 <p align="center"><strong>v0.1.3 — Full-width Tables and Bilingual About</strong></p>
 
 <p align="center">
@@ -23,12 +23,15 @@
 
 `seekport` 不是爬虫，也不是搜索引擎。它是一个很薄的桥接层：把 query 或 URL 交给 DeepSeek 官方的 Search / Fetch API，拿回排序结果或 Markdown，再交给 agent 使用。
 
-它主要解决四类问题：
+**它不要求模型是 DeepSeek。** 只要 `DEEPSEEK_API_KEY` 有余额，Claude、GPT、DeepSeek、本地模型都可以；Claude Code、Codex、Zcode、Cursor 或你自己的 harness 也都可以。Search / Fetch 是独立的付费 API，和模型调用是两笔账。
+
+它主要解决这些问题：
 
 - 第三方网关下，Claude Code 的 `WebFetch` 报 `Unable to verify if domain is safe to fetch`；
 - harness 的内置搜索不可用，或无法使用 DeepSeek 的 `site:` / `lang:` / `after:` 与 `rerank_score` / `authority` 过滤；
 - 只能引用二手文章，信息可能过时；
-- 不同 harness 的接入方式不同：有的能跑 shell，有的只能调 MCP。
+- 不同 harness 的接入方式不同：有的能跑 shell，有的只能调 MCP；
+- 模型不是 DeepSeek，但想用 DeepSeek 的官方 Search / Fetch。
 
 **它不是什么**：不是爬虫，不解析 HTML、不跟链接、不建索引；不是通用搜索引擎；不是 PubMed / Web of Science / Scopus；不是 DeepSeek 官方项目。
 
@@ -36,16 +39,39 @@
 
 ## 30 秒开始
 
+### 前提：一个能用的 DeepSeek API key
+
+1. 在 <https://platform.deepseek.com/api_keys> 创建 API key。
+2. 给账户充值。Search / Fetch 是付费 API：¥5 / 1,000 次成功请求，约 ¥0.005 / 次；空结果和失败不计费。
+3. 把 key 放进环境变量，不要贴进聊天：
+
+```bash
+export DEEPSEEK_API_KEY=sk-...
+```
+
+或者写入 `~/.config/seekport/env`（`chmod 600`），用 `set -a; . ~/.config/seekport/env; set +a` 加载。
+
+4. 如果你用 DSH：直接用官方 `@deepseek-ai/dsh-web-deepseek-api`，不需要 seekport。
+
 ### 方式一：让 agent 帮你装
 
 把下面这段直接发给 Claude Code / Codex / Zcode：
 
 ```text
 帮我安装 seekport 这个 Agent Skill。请先确认是否允许写入 ~/.claude/skills，然后：
-1. git clone https://github.com/ChemistryBus/seekport.git ~/.claude/skills/seekport
-2. 检查 SKILL.md、scripts/cli.py 是否存在
-3. 告诉我怎么设置 DEEPSEEK_API_KEY
+1. git clone https://github.com/ChemistryBus/seekport.git ~/seekport
+2. ln -s ~/seekport ~/.claude/skills/seekport
+3. 检查 SKILL.md、scripts/cli.py 是否存在
+4. 检查 DEEPSEEK_API_KEY 是否已设置（不要打印 key 的值）
+5. 如果没设置，告诉我应该在终端 export，或写进 ~/.config/seekport/env
 不要读取或上传我的 API key。
+```
+
+如果你已经把 key 写进 `~/.config/seekport/env`，也可以直接说：
+
+```text
+我的 DeepSeek key 在 ~/.config/seekport/env。请加载它（不要打印 key 的值），
+然后用 seekport 搜索 "Nutrients author guidelines site:mdpi.com"，先给我候选。
 ```
 
 ### 方式二：手动安装
@@ -59,6 +85,13 @@ export DEEPSEEK_API_KEY=sk-...
 重启 Claude Code，然后直接说：
 
 > 用 seekport 搜一下 Nutrients 最新的作者投稿指南
+
+### 装完怎么让 Agent 用
+
+```text
+用 seekport 搜索 "Nutrients author guidelines site:mdpi.com"，先给我候选；
+我选中后，再 fetch 官方原文，并把 URL 一起给我。
+```
 
 ### 先试一次搜索
 
@@ -126,13 +159,15 @@ python3 scripts/cli.py fetch "https://api-docs.deepseek.com/zh-cn/guides/search"
 
 **适合：**
 
-- 用 Claude Code / Codex / Zcode 跑 DeepSeek 的人；
+- 用 Claude Code / Codex / Zcode / Cursor，或自己的 harness；
+- 模型可以不是 DeepSeek：Claude、GPT、本地模型都行，只要 `DEEPSEEK_API_KEY` 有余额；
 - 走第三方网关，`WebFetch` 被拦的人；
 - 科研写论文，需要查官方文档、期刊投稿指南、会议 deadline 的人；
 - 希望结果先过滤、再进模型，控制 token 和费用的人。
 
 **不适合：**
 
+- 用 DSH 的人：官方 `@deepseek-ai/dsh-web-deepseek-api` 更好；
 - 需要 PubMed / Web of Science / Scopus 这类学术数据库；
 - 需要批量爬取、建索引或定时抓取；
 - 不想为 DeepSeek API 付费；
@@ -227,6 +262,14 @@ DSH 用户直接用官方包；seekport 面向非 DSH harness、第三方网关�
 **需要付费吗？**
 
 工具本身 MIT 免费；DeepSeek 的 Search / Fetch API 按次收费，约 ¥0.005 / 次，空结果和报错不计费。
+
+**我用的不是 DeepSeek 模型，能用吗？**
+
+能。seekport 只读 `DEEPSEEK_API_KEY`；模型和 harness 都不绑定。DeepSeek 的 Search / Fetch 是独立 API，和模型调用是两笔账。
+
+**API key 怎么申请、怎么充值？**
+
+在 <https://platform.deepseek.com/api_keys> 创建 key，并在 DeepSeek 开放平台充值。Search / Fetch 按成功请求计费；HTTP 402 表示余额不足。
 
 **支持 Windows 吗？**
 
